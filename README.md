@@ -2,4 +2,4 @@
 
 ## Experiments
 
-### [Peoplemore website revamp](experiments/peoplemore-revamp/README.md)
+### [Peoplemore website revamp - generowanie strony](experiments/peoplemore-revamp/README.md)

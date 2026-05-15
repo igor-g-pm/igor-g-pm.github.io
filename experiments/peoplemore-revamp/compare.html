@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Variant Comparison</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #13131a;
+      color: #cdd6f4;
+    }
+
+    /* ── Sidebar ── */
+    #sidebar {
+      width: 210px;
+      min-width: 210px;
+      display: flex;
+      flex-direction: column;
+      background: #1e1e2e;
+      border-right: 1px solid #313244;
+      overflow: hidden;
+    }
+
+    #sidebar-header {
+      padding: 14px 14px 10px;
+      border-bottom: 1px solid #313244;
+      flex-shrink: 0;
+    }
+
+    #sidebar-header h1 {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #89b4fa;
+      margin-bottom: 4px;
+    }
+
+    #count-hint {
+      font-size: 11px;
+      color: #6c7086;
+    }
+
+    #sidebar-scroll {
+      overflow-y: auto;
+      flex: 1;
+      padding: 10px 0 10px;
+    }
+
+    .group-title {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #6c7086;
+      padding: 6px 14px 4px;
+    }
+
+    .variant-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 14px;
+      font-size: 12px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.1s;
+    }
+
+    .variant-item:hover { background: #313244; }
+
+    .variant-item.disabled {
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .variant-item input[type="checkbox"] {
+      accent-color: #89b4fa;
+      width: 13px;
+      height: 13px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .variant-item span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* ── Main area ── */
+    #main {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .pane {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      min-width: 60px;
+    }
+
+    .pane-header {
+      flex-shrink: 0;
+      background: #1e1e2e;
+      border-bottom: 1px solid #313244;
+      padding: 5px 10px;
+      font-size: 11px;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #a6adc8;
+    }
+
+    .pane iframe {
+      flex: 1;
+      border: none;
+      display: block;
+      width: 100%;
+    }
+
+    .divider {
+      width: 5px;
+      flex-shrink: 0;
+      background: #313244;
+      cursor: col-resize;
+      transition: background 0.15s;
+      position: relative;
+    }
+
+    .divider::after {
+      content: '';
+      position: absolute;
+      inset: 0 -3px;
+    }
+
+    .divider:hover, .divider.dragging { background: #89b4fa; }
+
+    #drag-overlay {
+      display: none;
+      position: absolute;
+      inset: 0;
+      z-index: 100;
+      cursor: col-resize;
+    }
+
+    #empty {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: #6c7086;
+      font-size: 13px;
+    }
+
+    #empty svg { opacity: 0.3; }
+  </style>
+</head>
+<body>
+
+<div id="sidebar">
+  <div id="sidebar-header">
+    <h1>Variants</h1>
+    <div id="count-hint">0 / 4 selected</div>
+  </div>
+  <div id="sidebar-scroll"></div>
+</div>
+
+<div id="main">
+  <div id="drag-overlay"></div>
+  <div id="empty">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <rect x="3" y="3" width="7" height="18" rx="1"/><rect x="14" y="3" width="7" height="18" rx="1"/>
+    </svg>
+    Select variants from the left panel
+  </div>
+</div>
+
+<script>
+  const groups = [
+    {
+      title: 'Multi-page',
+      variants: [
+        { id: 'vanilla-claude',    label: 'vanilla-claude',    url: 'vanilla-claude/index.html' },
+        { id: 'vanilla-codex',     label: 'vanilla-codex',     url: 'vanilla-codex/index.html' },
+        { id: 'claude-impeccable', label: 'claude-impeccable', url: 'claude-impeccable/index.html' },
+        { id: 'codex-impeccable',  label: 'codex-impeccable',  url: 'codex-impeccable/index.html' },
+      ]
+    },
+    {
+      title: 'Single-file',
+      variants: [
+        { id: 'claude-design',            label: 'claude-design',            url: 'claude-design/index.html' },
+        { id: 'claude-opus-4-7-v1',       label: 'claude-opus-4-7 v1',       url: 'single-file-page-generation/claude-opus-4-7-variant1.html' },
+        { id: 'claude-opus-4-7-v2',       label: 'claude-opus-4-7 v2',       url: 'single-file-page-generation/claude-opus-4-7-variant2.html' },
+        { id: 'claude-opus-4-7-v3',       label: 'claude-opus-4-7 v3',       url: 'single-file-page-generation/claude-opus-4-7-variant3.html' },
+        { id: 'claude-sonnet-4-6-v1',     label: 'claude-sonnet-4-6 v1',     url: 'single-file-page-generation/claude-sonnet-4-6-variant-1.html' },
+        { id: 'claude-sonnet-4-6-v2',     label: 'claude-sonnet-4-6 v2',     url: 'single-file-page-generation/claude-sonnet-4-6-variant-2.html' },
+        { id: 'claude-sonnet-4-6-v3',     label: 'claude-sonnet-4-6 v3',     url: 'single-file-page-generation/claude-sonnet-4-6-variant-3.html' },
+        { id: 'codex-5-3-v1',             label: 'codex-5-3 v1',             url: 'single-file-page-generation/codex-5-3-variant-1.html' },
+        { id: 'codex-5-3-v2',             label: 'codex-5-3 v2',             url: 'single-file-page-generation/codex-5-3-variant-2.html' },
+        { id: 'codex-5-3-v3',             label: 'codex-5-3 v3',             url: 'single-file-page-generation/codex-5-3-variant-3.html' },
+        { id: 'gpt-5-5-enterprise-edge',  label: 'gpt-5-5 enterprise-edge',  url: 'single-file-page-generation/gpt-5-5-variant-enterprise-edge.html' },
+        { id: 'gpt-5-5-human-first',      label: 'gpt-5-5 human-first',      url: 'single-file-page-generation/gpt-5-5-variant-human-first.html' },
+        { id: 'gpt-5-5-team-spark',       label: 'gpt-5-5 team-spark',       url: 'single-file-page-generation/gpt-5-5-variant-team-spark.html' },
+      ]
+    }
+  ];
+
+  const allVariants = groups.flatMap(g => g.variants);
+  let selected = [];
+  let sizes = [];
+
+  // ── Build sidebar ──────────────────────────────────────────────
+  const sidebarScroll = document.getElementById('sidebar-scroll');
+
+  groups.forEach(group => {
+    const titleEl = document.createElement('div');
+    titleEl.className = 'group-title';
+    titleEl.textContent = group.title;
+    sidebarScroll.appendChild(titleEl);
+
+    group.variants.forEach(v => {
+      const label = document.createElement('label');
+      label.className = 'variant-item';
+      label.id = `item-${v.id}`;
+
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.id = `cb-${v.id}`;
+      cb.addEventListener('change', () => onToggle(v.id, cb.checked));
+
+      const span = document.createElement('span');
+      span.textContent = v.label;
+      span.title = v.label;
+
+      label.appendChild(cb);
+      label.appendChild(span);
+      sidebarScroll.appendChild(label);
+    });
+  });
+
+  // ── State logic ────────────────────────────────────────────────
+  function onToggle(id, checked) {
+    if (checked) {
+      if (selected.length >= 4) {
+        document.getElementById(`cb-${id}`).checked = false;
+        return;
+      }
+      selected.push(id);
+    } else {
+      selected = selected.filter(s => s !== id);
+    }
+    sizes = selected.map(() => 1);
+    syncSidebar();
+    renderPanes();
+  }
+
+  function syncSidebar() {
+    const hint = document.getElementById('count-hint');
+    hint.textContent = `${selected.length} / 4 selected`;
+
+    allVariants.forEach(v => {
+      const item = document.getElementById(`item-${v.id}`);
+      const cb = document.getElementById(`cb-${v.id}`);
+      const maxed = selected.length >= 4 && !cb.checked;
+      item.classList.toggle('disabled', maxed);
+    });
+  }
+
+  // ── Render panes ───────────────────────────────────────────────
+  function renderPanes() {
+    const main = document.getElementById('main');
+    const overlay = document.getElementById('drag-overlay');
+    const empty = document.getElementById('empty');
+
+    main.querySelectorAll('.pane, .divider').forEach(el => el.remove());
+
+    if (selected.length === 0) {
+      empty.style.display = 'flex';
+      return;
+    }
+    empty.style.display = 'none';
+
+    selected.forEach((id, i) => {
+      const variant = allVariants.find(v => v.id === id);
+
+      if (i > 0) {
+        const div = document.createElement('div');
+        div.className = 'divider';
+        div.addEventListener('mousedown', e => startResize(e, i - 1, div));
+        main.insertBefore(div, overlay);
+      }
+
+      const pane = document.createElement('div');
+      pane.className = 'pane';
+      pane.id = `pane-${id}`;
+      pane.style.flex = `${sizes[i]} 1 0px`;
+
+      const header = document.createElement('div');
+      header.className = 'pane-header';
+      header.textContent = variant.label;
+      header.title = variant.label;
+
+      const iframe = document.createElement('iframe');
+      iframe.src = variant.url;
+      iframe.setAttribute('loading', 'lazy');
+
+      pane.appendChild(header);
+      pane.appendChild(iframe);
+      main.insertBefore(pane, overlay);
+    });
+  }
+
+  // ── Resize ─────────────────────────────────────────────────────
+  let drag = null;
+
+  function startResize(e, leftIdx, divEl) {
+    e.preventDefault();
+    const main = document.getElementById('main');
+    drag = {
+      leftIdx,
+      divEl,
+      startX: e.clientX,
+      startSizes: [...sizes],
+      totalWidth: main.offsetWidth,
+    };
+    divEl.classList.add('dragging');
+    document.getElementById('drag-overlay').style.display = 'block';
+  }
+
+  document.addEventListener('mousemove', e => {
+    if (!drag) return;
+    const delta = e.clientX - drag.startX;
+    const totalFlex = drag.startSizes.reduce((a, b) => a + b, 0);
+    const flexDelta = delta * (totalFlex / drag.totalWidth);
+    const min = totalFlex * 0.05;
+    const i = drag.leftIdx, j = i + 1;
+    const newL = drag.startSizes[i] + flexDelta;
+    const newR = drag.startSizes[j] - flexDelta;
+    if (newL >= min && newR >= min) {
+      sizes[i] = newL;
+      sizes[j] = newR;
+      selected.forEach((id, idx) => {
+        const pane = document.getElementById(`pane-${id}`);
+        if (pane) pane.style.flex = `${sizes[idx]} 1 0px`;
+      });
+    }
+  });
+
+  document.addEventListener('mouseup', () => {
+    if (!drag) return;
+    drag.divEl.classList.remove('dragging');
+    document.getElementById('drag-overlay').style.display = 'none';
+    drag = null;
+  });
+</script>
+</body>
+</html>
