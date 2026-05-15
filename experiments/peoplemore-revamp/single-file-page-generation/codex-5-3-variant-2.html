@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>People More | Scale Your Product Team</title>
+  <meta name="description" content="Partner with People More to launch products faster with senior European engineers and a people-first delivery culture." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fff7ec;
+      --ink: #1f1d3a;
+      --muted: #5d5b78;
+      --card: #ffffff;
+      --brand: #ff7b2c;
+      --brand-2: #f24267;
+      --line: #f1d9bf;
+      --ok: #0f9868;
+      --radius: 18px;
+      --shadow: 0 20px 45px rgba(37, 28, 58, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Sora", sans-serif;
+      background:
+        radial-gradient(circle at 95% 15%, rgba(255, 123, 44, 0.18), transparent 36%),
+        radial-gradient(circle at 5% 65%, rgba(242, 66, 103, 0.18), transparent 34%),
+        var(--bg);
+      color: var(--ink);
+      line-height: 1.55;
+    }
+
+    .container {
+      width: min(1140px, 92vw);
+      margin: 0 auto;
+    }
+
+    .top {
+      padding: 22px 0;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .logo-wrap {
+      display: inline-flex;
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: #261f3f;
+    }
+
+    .logo-wrap svg {
+      width: 142px;
+      height: auto;
+    }
+
+    .top .btn {
+      background: var(--ink);
+      color: #fff;
+      border: 0;
+      border-radius: 12px;
+      font-weight: 700;
+      padding: 11px 16px;
+      cursor: pointer;
+    }
+
+    .hero {
+      padding: 30px 0 42px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-family: "Fraunces", serif;
+      font-weight: 700;
+      font-size: clamp(2rem, 4.2vw, 3.8rem);
+      line-height: 1.04;
+      margin-bottom: 16px;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 58ch;
+      margin-bottom: 20px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .action {
+      text-decoration: none;
+      border-radius: 12px;
+      padding: 11px 15px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: 0.2s ease;
+    }
+
+    .action.primary {
+      background: linear-gradient(120deg, var(--brand), #ffae42);
+      color: #291b12;
+    }
+
+    .action.secondary {
+      color: var(--ink);
+      border-color: #cdb79c;
+      background: #fff;
+    }
+
+    .action:hover {
+      transform: translateY(-2px);
+    }
+
+    .trust {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .trust span {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 10px;
+    }
+
+    .panel {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+
+    .panel h2 {
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+    }
+
+    .calc-row {
+      margin-bottom: 12px;
+    }
+
+    .calc-row label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .panel input[type="range"] {
+      width: 100%;
+      accent-color: var(--brand-2);
+    }
+
+    .result {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .metric {
+      border-radius: 12px;
+      border: 1px solid #f0e0cc;
+      padding: 11px;
+      background: #fffaf3;
+    }
+
+    .metric strong {
+      font-size: 1.2rem;
+      display: block;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    section {
+      padding: 26px 0;
+    }
+
+    .title {
+      font-size: clamp(1.45rem, 3vw, 2.2rem);
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin-bottom: 16px;
+      max-width: 68ch;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 13px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      font-size: 1.02rem;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .step {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 14px;
+      padding: 14px;
+    }
+
+    .step b {
+      display: inline-block;
+      color: #fff;
+      font-size: 0.84rem;
+      border-radius: 999px;
+      background: var(--ink);
+      padding: 4px 8px;
+      margin-bottom: 8px;
+    }
+
+    .step h4 {
+      margin-bottom: 6px;
+      font-size: 0.98rem;
+    }
+
+    .faq {
+      display: grid;
+      gap: 8px;
+    }
+
+    .faq-item {
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .faq-btn {
+      width: 100%;
+      border: 0;
+      text-align: left;
+      background: #fff;
+      padding: 13px 14px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .faq-content {
+      display: none;
+      padding: 0 14px 12px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .faq-item.open .faq-content {
+      display: block;
+    }
+
+    .contact {
+      margin-top: 4px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #251e3f, #3a284a 65%);
+      color: #fff;
+      padding: 22px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .contact p {
+      color: #dfd8ea;
+      margin-bottom: 8px;
+    }
+
+    .contact form {
+      display: grid;
+      gap: 8px;
+    }
+
+    .contact input,
+    .contact textarea {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #fff;
+      border-radius: 10px;
+      padding: 10px;
+      font: inherit;
+    }
+
+    .contact textarea {
+      min-height: 84px;
+      resize: vertical;
+    }
+
+    .contact button {
+      background: linear-gradient(120deg, #ffb24e, #ff7b2c);
+      border: 0;
+      border-radius: 10px;
+      padding: 11px 14px;
+      font: inherit;
+      font-weight: 700;
+      color: #281a11;
+      cursor: pointer;
+    }
+
+    .ok {
+      color: #8cf5c2;
+      min-height: 1.2em;
+      font-size: 0.9rem;
+    }
+
+    footer {
+      color: var(--muted);
+      font-size: 0.88rem;
+      padding: 24px 0 34px;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .grid-3,
+      .timeline,
+      .contact {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="container nav">
+      <a class="logo-wrap" href="#">
+        <svg role="img" aria-labelledby="peoplemore-logo" id="navlogo" xmlns="http://www.w3.org/2000/svg" width="142.644" height="33" viewBox="0 0 142.644 32.658"><title id="peoplemore-logo">PeopeMore main page</title><g id="Group_1772" data-name="Group 1772" transform="translate(-102.084 -810.724)"><path id="Rectangle_1" data-name="Rectangle 1" d="M-1-1H141.644V31.658H-1ZM139.644,1H1V29.658H139.644Z" transform="translate(103.084 811.724)" fill="#fff"></path><g id="Group_1" data-name="Group 1" transform="translate(111.429 819.442)"><path id="Path_1" data-name="Path 1" d="M113.152,827.6v5.279h-2.84V818.653h5.177a5.344,5.344,0,0,1,3.8,1.209,4.3,4.3,0,0,1,1.279,3.285,4.183,4.183,0,0,1-1.32,3.243,5.365,5.365,0,0,1-3.757,1.208Zm4.533-4.451a2.169,2.169,0,0,0-.584-1.633,2.7,2.7,0,0,0-1.914-.563h-2.034v4.371h2.034Q117.685,825.321,117.685,823.146Z" transform="translate(-110.312 -818.371)" fill="#fff"></path><path id="Path_2" data-name="Path 2" d="M123.2,820.909V824.6h5.036v2.176H123.2V830.6h5.641v2.277h-8.481V818.653h8.481v2.256Z" transform="translate(-108.759 -818.371)" fill="#fff"></path><path id="Path_3" data-name="Path 3" d="M139.429,819.406a6.728,6.728,0,0,1,2.558,2.587,8.028,8.028,0,0,1,0,7.525,6.7,6.7,0,0,1-2.558,2.6,7.515,7.515,0,0,1-7.232,0,6.7,6.7,0,0,1-2.558-2.6,8.028,8.028,0,0,1,0-7.525,6.72,6.72,0,0,1,2.558-2.587,7.516,7.516,0,0,1,7.232,0Zm-5.812,2.256a3.855,3.855,0,0,0-1.48,1.622,5.964,5.964,0,0,0,0,4.935,3.852,3.852,0,0,0,1.48,1.621,4.552,4.552,0,0,0,4.392,0,3.852,3.852,0,0,0,1.48-1.621,5.963,5.963,0,0,0,0-4.935,3.855,3.855,0,0,0-1.48-1.622,4.553,4.553,0,0,0-4.392,0Z" transform="translate(-107.471 -818.398)" fill="#fff"></path><path id="Path_4" data-name="Path 4" d="M145.275,827.6v5.279h-2.84V818.653h5.177a5.344,5.344,0,0,1,3.8,1.209,4.3,4.3,0,0,1,1.279,3.285,4.183,4.183,0,0,1-1.32,3.243,5.366,5.366,0,0,1-3.757,1.208Zm4.532-4.451a2.169,2.169,0,0,0-.584-1.633,2.7,2.7,0,0,0-1.914-.563h-2.034v4.371h2.034Q149.808,825.321,149.808,823.146Z" transform="translate(-105.349 -818.371)" fill="#fff"></path><path id="Path_5" data-name="Path 5" d="M155.325,830.7H160.1v2.176h-7.615V818.653h2.84Z" transform="translate(-103.797 -818.371)" fill="#fff"></path><path id="Path_6" data-name="Path 6" d="M162.95,820.909V824.6h5.036v2.176H162.95V830.6h5.641v2.277H160.11V818.653h8.481v2.256Z" transform="translate(-102.619 -818.371)" fill="#fff"></path><path id="Path_7" data-name="Path 7" d="M185.732,818.619v14.263h-4.451V825.77l-2.2,7.112h-3.828l-2.2-7.112v7.112H168.59V818.619h5.479l3.143,8.561,3.062-8.561Z" transform="translate(-101.309 -818.377)" fill="#fff"></path><path id="Path_8" data-name="Path 8" d="M195.437,819.347a6.962,6.962,0,0,1,2.648,2.608,7.745,7.745,0,0,1,0,7.534,7,7,0,0,1-2.659,2.618,7.642,7.642,0,0,1-7.373,0,7.075,7.075,0,0,1-2.669-2.618,7.682,7.682,0,0,1,0-7.534,7.015,7.015,0,0,1,2.669-2.608,7.736,7.736,0,0,1,7.383,0Zm-5.761,4.049a3.486,3.486,0,0,0-.726,2.326,3.45,3.45,0,0,0,.726,2.307,2.918,2.918,0,0,0,4.128,0,3.45,3.45,0,0,0,.726-2.307,3.486,3.486,0,0,0-.726-2.326,2.915,2.915,0,0,0-4.128,0Z" transform="translate(-98.867 -818.409)" fill="#fff"></path><path id="Path_9" data-name="Path 9" d="M205.232,832.882l-2.7-5.118v5.118h-4.471V818.619h6.646a6.553,6.553,0,0,1,2.961.614,4.261,4.261,0,0,1,1.844,1.673,4.656,4.656,0,0,1,.614,2.386,4.24,4.24,0,0,1-.8,2.538,4.375,4.375,0,0,1-2.286,1.592l3.1,5.46Zm-2.7-8.1h1.773a1.4,1.4,0,0,0,.966-.292,1.4,1.4,0,0,0-.01-1.8,1.314,1.314,0,0,0-.956-.323h-1.773Z" transform="translate(-96.756 -818.377)" fill="#fff"></path><path id="Path_10" data-name="Path 10" d="M213.786,822.163v1.775h4.432V827.3h-4.432v2.015h5.037v3.566h-9.508V818.619h9.508v3.544Z" transform="translate(-95.017 -818.377)" fill="#fff"></path></g></g></svg>
+      </a>
+      <button class="btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Talk To Experts</button>
+    </div>
+  </div>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <div class="tag">People-first engineering from Krakow, Poland</div>
+        <h1>Need to ship more software this quarter? Bring in a team that delivers from day one.</h1>
+        <p class="lead">People More helps product leaders launch faster with senior frontend, backend, mobile, cloud, and integration specialists. We combine delivery discipline with UX quality so your users feel the difference.</p>
+        <div class="hero-actions">
+          <a class="action primary" href="#contact">Get Delivery Blueprint</a>
+          <a class="action secondary" href="#services">See Service Scope</a>
+        </div>
+        <div class="trust">
+          <span>Trusted by SME and enterprise teams</span>
+          <span>100% remote-friendly collaboration</span>
+          <span>Direct access to decision makers</span>
+        </div>
+      </div>
+
+      <aside class="panel" aria-label="Delivery planner">
+        <h2>Quick Delivery Planner</h2>
+        <div class="calc-row">
+          <label for="engineers">Engineers <strong id="engineers-value">5</strong></label>
+          <input type="range" id="engineers" min="2" max="15" value="5" />
+        </div>
+        <div class="calc-row">
+          <label for="months">Engagement (months) <strong id="months-value">6</strong></label>
+          <input type="range" id="months" min="2" max="18" value="6" />
+        </div>
+        <div class="result">
+          <div class="metric">
+            <strong id="velocity">60</strong>
+            <span>feature points / month</span>
+          </div>
+          <div class="metric">
+            <strong id="kickoff">14</strong>
+            <span>days to onboarding</span>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="services">
+      <h2 class="title">What we can deliver for your business</h2>
+      <p class="subtitle">From complete product builds to augmentation and deep technical consulting, People More supports your team where it matters most.</p>
+      <div class="grid-3">
+        <article class="card">
+          <h3>Product Design + Development</h3>
+          <p>UX/UI, frontend, backend, and mobile under one delivery model with clear sprint outcomes.</p>
+        </article>
+        <article class="card">
+          <h3>Team Extension</h3>
+          <p>Senior European engineers integrated into your existing process, standups, and architecture.</p>
+        </article>
+        <article class="card">
+          <h3>System Integrations</h3>
+          <p>REST/SOAP APIs, data pipelines, and cloud architecture for complex business processes.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="title">How fast we move together</h2>
+      <p class="subtitle">A practical four-step model that removes delivery risk and keeps stakeholders aligned.</p>
+      <div class="timeline">
+        <article class="step"><b>Week 1</b><h4>Discovery</h4><p>Goals, architecture review, and roadmap prioritization.</p></article>
+        <article class="step"><b>Week 2</b><h4>Team Setup</h4><p>Assign roles, launch tooling, and onboard with your workflows.</p></article>
+        <article class="step"><b>Week 3+</b><h4>Execution</h4><p>Sprint delivery with demos, QA gates, and transparent reporting.</p></article>
+        <article class="step"><b>Ongoing</b><h4>Optimization</h4><p>Continuous improvements in performance, quality, and velocity.</p></article>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="title">FAQ</h2>
+      <div class="faq" id="faq">
+        <article class="faq-item open">
+          <button class="faq-btn" type="button">Do you work only with Polish clients?</button>
+          <p class="faq-content">No. People More collaborates with both Polish and international partners in fully remote and hybrid setups.</p>
+        </article>
+        <article class="faq-item">
+          <button class="faq-btn" type="button">Can you support legacy systems and modernization?</button>
+          <p class="faq-content">Yes. We handle modernization plans, incremental refactors, and stable integration with legacy environments.</p>
+        </article>
+        <article class="faq-item">
+          <button class="faq-btn" type="button">Which tech stacks are most common?</button>
+          <p class="faq-content">React, Angular, TypeScript, C#/.NET, Java, Python, Node.js, relational databases, and AWS/Azure/GCP.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div>
+        <h2 class="title">Plan your next release with People More</h2>
+        <p>Tell us your delivery target and current bottleneck. We will propose a team setup and rollout plan matched to your goals.</p>
+        <p><strong>People More P.S.A.</strong><br />Krakow, Poland<br />Remote collaboration worldwide</p>
+      </div>
+      <form id="contact-form" novalidate>
+        <input id="company" placeholder="Company name" required />
+        <input id="mail" type="email" placeholder="Work email" required />
+        <textarea id="challenge" placeholder="What are you trying to deliver?" required></textarea>
+        <button type="submit">Request Intro Call</button>
+        <p class="ok" id="ok"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">People More | Software development, outsourcing, and technical consulting with a people-first mindset.</div>
+  </footer>
+
+  <script>
+    const engineers = document.getElementById("engineers");
+    const months = document.getElementById("months");
+    const engineersValue = document.getElementById("engineers-value");
+    const monthsValue = document.getElementById("months-value");
+    const velocity = document.getElementById("velocity");
+    const kickoff = document.getElementById("kickoff");
+
+    function updatePlanner() {
+      const e = Number(engineers.value);
+      const m = Number(months.value);
+      engineersValue.textContent = e;
+      monthsValue.textContent = m;
+      velocity.textContent = Math.round(e * 11.5);
+      kickoff.textContent = Math.max(7, 16 - Math.floor(e / 2));
+    }
+
+    engineers.addEventListener("input", updatePlanner);
+    months.addEventListener("input", updatePlanner);
+    updatePlanner();
+
+    document.querySelectorAll(".faq-btn").forEach((button) => {
+      button.addEventListener("click", () => {
+        const item = button.closest(".faq-item");
+        item.classList.toggle("open");
+      });
+    });
+
+    document.getElementById("contact-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const company = document.getElementById("company").value.trim();
+      const email = document.getElementById("mail").value.trim();
+      const challenge = document.getElementById("challenge").value.trim();
+      const ok = document.getElementById("ok");
+
+      if (!company || !email.includes("@") || !challenge) {
+        ok.style.color = "#ffc8c8";
+        ok.textContent = "Please complete all fields with a valid work email.";
+        return;
+      }
+
+      ok.style.color = "#8cf5c2";
+      ok.textContent = "Thanks. Your brief is ready to share with the People More team.";
+      event.target.reset();
+      updatePlanner();
+    });
+  </script>
+</body>
+</html>

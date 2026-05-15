@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>People More — Software That Feels Human</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #0a0a0f;
+    color: #e8e8ee;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* Animated gradient background */
+  .bg-gradient {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.15), transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.12), transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(34, 211, 238, 0.08), transparent 50%);
+    z-index: -1;
+    animation: bgShift 20s ease-in-out infinite alternate;
+  }
+  @keyframes bgShift {
+    0% { transform: scale(1) rotate(0deg); }
+    100% { transform: scale(1.1) rotate(5deg); }
+  }
+
+  /* Navigation */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(20px);
+    background: rgba(10, 10, 15, 0.7);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+  }
+  nav .menu { display: flex; gap: 40px; align-items: center; }
+  nav .menu a {
+    font-size: 14px;
+    font-weight: 500;
+    color: #b8b8c4;
+    transition: color 0.3s;
+    position: relative;
+  }
+  nav .menu a:hover { color: #fff; }
+  nav .menu a::after {
+    content: '';
+    position: absolute;
+    bottom: -6px; left: 0;
+    width: 0; height: 2px;
+    background: linear-gradient(90deg, #6366f1, #ec4899);
+    transition: width 0.3s;
+  }
+  nav .menu a:hover::after { width: 100%; }
+  .cta-btn {
+    padding: 12px 28px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 14px;
+    color: #fff !important;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+  }
+  .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(99, 102, 241, 0.5);
+  }
+  .cta-btn::after { display: none !important; }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 120px 60px 80px;
+    text-align: center;
+    position: relative;
+  }
+  .hero-badge {
+    display: inline-block;
+    padding: 8px 20px;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 100px;
+    font-size: 13px;
+    color: #a5b4fc;
+    margin-bottom: 30px;
+    animation: fadeInUp 0.8s ease-out;
+  }
+  .hero h1 {
+    font-size: clamp(48px, 8vw, 96px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 30px;
+    background: linear-gradient(135deg, #fff 0%, #a5b4fc 50%, #f0abfc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeInUp 0.8s ease-out 0.1s both;
+  }
+  .hero p.subtitle {
+    font-size: clamp(18px, 2vw, 22px);
+    color: #b8b8c4;
+    max-width: 720px;
+    margin-bottom: 50px;
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeInUp 0.8s ease-out 0.3s both;
+  }
+  .btn-primary {
+    padding: 16px 36px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 15px;
+    color: #fff;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(99, 102, 241, 0.5); }
+  .btn-secondary {
+    padding: 16px 36px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 15px;
+    color: #fff;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.3); }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Stats */
+  .stats {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    margin-top: 100px;
+    flex-wrap: wrap;
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-size: 48px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #6366f1, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .stat-label { color: #8888a0; font-size: 14px; margin-top: 4px; }
+
+  /* Sections */
+  section { padding: 120px 60px; position: relative; }
+  .section-tag {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 100px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #a5b4fc;
+    margin-bottom: 20px;
+  }
+  .section-title {
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    max-width: 700px;
+  }
+  .section-subtitle {
+    font-size: 18px;
+    color: #b8b8c4;
+    max-width: 600px;
+    margin-bottom: 60px;
+  }
+
+  /* Services grid */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .service-card {
+    padding: 40px 32px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+    transition: left 0.6s;
+  }
+  .service-card:hover::before { left: 100%; }
+  .service-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(99, 102, 241, 0.4);
+    background: rgba(99, 102, 241, 0.05);
+  }
+  .service-icon {
+    width: 56px; height: 56px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    font-size: 28px;
+  }
+  .service-card h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .service-card p {
+    color: #9999ad;
+    font-size: 15px;
+  }
+  .service-card .tags {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .service-card .tags span {
+    padding: 4px 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 100px;
+    font-size: 12px;
+    color: #b8b8c4;
+  }
+
+  /* Tech stack */
+  .tech-section {
+    background: linear-gradient(180deg, transparent 0%, rgba(99, 102, 241, 0.03) 50%, transparent 100%);
+  }
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .tech-item {
+    padding: 24px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s;
+    color: #d4d4dc;
+  }
+  .tech-item:hover {
+    background: rgba(99, 102, 241, 0.1);
+    border-color: rgba(99, 102, 241, 0.3);
+    transform: scale(1.05);
+    color: #fff;
+  }
+
+  /* Why us section */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 32px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .why-card {
+    padding: 40px;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(236, 72, 153, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    position: relative;
+  }
+  .why-num {
+    font-size: 64px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #6366f1, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+  .why-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 12px; }
+  .why-card p { color: #b8b8c4; font-size: 15px; }
+
+  /* CTA */
+  .cta-section {
+    text-align: center;
+    padding: 140px 60px;
+  }
+  .cta-box {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px 60px;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(236, 72, 153, 0.1));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-box::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.2), transparent 60%);
+    animation: rotate 20s linear infinite;
+  }
+  @keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .cta-box > * { position: relative; z-index: 1; }
+  .cta-box h2 {
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 800;
+    margin-bottom: 20px;
+    line-height: 1.1;
+  }
+  .cta-box p {
+    font-size: 18px;
+    color: #d4d4dc;
+    margin-bottom: 40px;
+  }
+
+  /* Footer */
+  footer {
+    padding: 60px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+    color: #8888a0;
+    font-size: 14px;
+  }
+  footer .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto 40px;
+    text-align: left;
+  }
+  footer h4 { color: #fff; margin-bottom: 16px; font-size: 14px; }
+  footer ul { list-style: none; }
+  footer ul li { margin-bottom: 8px; }
+  footer ul li a:hover { color: #a5b4fc; }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    nav .menu { gap: 20px; }
+    nav .menu a:not(.cta-btn) { display: none; }
+    section, .hero { padding: 80px 24px; }
+    .stats { gap: 40px; margin-top: 60px; }
+  }
+</style>
+</head>
+<body>
+<div class="bg-gradient"></div>
+
+<nav>
+  <a href="#" aria-label="People More home">
+    <svg role="img" aria-labelledby="peoplemore-logo" id="navlogo" xmlns="http://www.w3.org/2000/svg" width="142.644" height="33" viewBox="0 0 142.644 32.658"><title id="peoplemore-logo">People More</title><g transform="translate(-102.084 -810.724)"><path d="M-1-1H141.644V31.658H-1ZM139.644,1H1V29.658H139.644Z" transform="translate(103.084 811.724)" fill="#fff"></path><g transform="translate(111.429 819.442)"><path d="M113.152,827.6v5.279h-2.84V818.653h5.177a5.344,5.344,0,0,1,3.8,1.209,4.3,4.3,0,0,1,1.279,3.285,4.183,4.183,0,0,1-1.32,3.243,5.365,5.365,0,0,1-3.757,1.208Zm4.533-4.451a2.169,2.169,0,0,0-.584-1.633,2.7,2.7,0,0,0-1.914-.563h-2.034v4.371h2.034Q117.685,825.321,117.685,823.146Z" transform="translate(-110.312 -818.371)" fill="#fff"></path><path d="M123.2,820.909V824.6h5.036v2.176H123.2V830.6h5.641v2.277h-8.481V818.653h8.481v2.256Z" transform="translate(-108.759 -818.371)" fill="#fff"></path><path d="M139.429,819.406a6.728,6.728,0,0,1,2.558,2.587,8.028,8.028,0,0,1,0,7.525,6.7,6.7,0,0,1-2.558,2.6,7.515,7.515,0,0,1-7.232,0,6.7,6.7,0,0,1-2.558-2.6,8.028,8.028,0,0,1,0-7.525,6.72,6.72,0,0,1,2.558-2.587,7.516,7.516,0,0,1,7.232,0Zm-5.812,2.256a3.855,3.855,0,0,0-1.48,1.622,5.964,5.964,0,0,0,0,4.935,3.852,3.852,0,0,0,1.48,1.621,4.552,4.552,0,0,0,4.392,0,3.852,3.852,0,0,0,1.48-1.621,5.963,5.963,0,0,0,0-4.935,3.855,3.855,0,0,0-1.48-1.622,4.553,4.553,0,0,0-4.392,0Z" transform="translate(-107.471 -818.398)" fill="#fff"></path><path d="M145.275,827.6v5.279h-2.84V818.653h5.177a5.344,5.344,0,0,1,3.8,1.209,4.3,4.3,0,0,1,1.279,3.285,4.183,4.183,0,0,1-1.32,3.243,5.366,5.366,0,0,1-3.757,1.208Zm4.532-4.451a2.169,2.169,0,0,0-.584-1.633,2.7,2.7,0,0,0-1.914-.563h-2.034v4.371h2.034Q149.808,825.321,149.808,823.146Z" transform="translate(-105.349 -818.371)" fill="#fff"></path><path d="M155.325,830.7H160.1v2.176h-7.615V818.653h2.84Z" transform="translate(-103.797 -818.371)" fill="#fff"></path><path d="M162.95,820.909V824.6h5.036v2.176H162.95V830.6h5.641v2.277H160.11V818.653h8.481v2.256Z" transform="translate(-102.619 -818.371)" fill="#fff"></path><path d="M185.732,818.619v14.263h-4.451V825.77l-2.2,7.112h-3.828l-2.2-7.112v7.112H168.59V818.619h5.479l3.143,8.561,3.062-8.561Z" transform="translate(-101.309 -818.377)" fill="#fff"></path><path d="M195.437,819.347a6.962,6.962,0,0,1,2.648,2.608,7.745,7.745,0,0,1,0,7.534,7,7,0,0,1-2.659,2.618,7.642,7.642,0,0,1-7.373,0,7.075,7.075,0,0,1-2.669-2.618,7.682,7.682,0,0,1,0-7.534,7.015,7.015,0,0,1,2.669-2.608,7.736,7.736,0,0,1,7.383,0Zm-5.761,4.049a3.486,3.486,0,0,0-.726,2.326,3.45,3.45,0,0,0,.726,2.307,2.918,2.918,0,0,0,4.128,0,3.45,3.45,0,0,0,.726-2.307,3.486,3.486,0,0,0-.726-2.326,2.915,2.915,0,0,0-4.128,0Z" transform="translate(-98.867 -818.409)" fill="#fff"></path><path d="M205.232,832.882l-2.7-5.118v5.118h-4.471V818.619h6.646a6.553,6.553,0,0,1,2.961.614,4.261,4.261,0,0,1,1.844,1.673,4.656,4.656,0,0,1,.614,2.386,4.24,4.24,0,0,1-.8,2.538,4.375,4.375,0,0,1-2.286,1.592l3.1,5.46Zm-2.7-8.1h1.773a1.4,1.4,0,0,0,.966-.292,1.4,1.4,0,0,0-.01-1.8,1.314,1.314,0,0,0-.956-.323h-1.773Z" transform="translate(-96.756 -818.377)" fill="#fff"></path><path d="M213.786,822.163v1.775h4.432V827.3h-4.432v2.015h5.037v3.566h-9.508V818.619h9.508v3.544Z" transform="translate(-95.017 -818.377)" fill="#fff"></path></g></g></svg>
+  </a>
+  <div class="menu">
+    <a href="#services">Services</a>
+    <a href="#tech">Technologies</a>
+    <a href="#why">Why Us</a>
+    <a href="#contact" class="cta-btn">Start a project</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <span class="hero-badge">✨ Software house from Kraków, working globally</span>
+  <h1>Software<br>built for people.</h1>
+  <p class="subtitle">We are People More — a Polish software house crafting intuitive, beautiful and reliable digital products. Backed by 20+ years of experience through our parent company Insignia.</p>
+  <div class="hero-actions">
+    <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Start your project</button>
+    <button class="btn-secondary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Explore services</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat-item">
+      <div class="stat-num">20+</div>
+      <div class="stat-label">Years of expertise</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Remote-friendly</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">10+</div>
+      <div class="stat-label">Tech stacks mastered</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">∞</div>
+      <div class="stat-label">Possibilities delivered</div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <span class="section-tag">What we do</span>
+  <h2 class="section-title">End-to-end services for ambitious teams</h2>
+  <p class="section-subtitle">From the first wireframe to the millionth user, we are your technology partner across the entire product lifecycle.</p>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🎨</div>
+      <h3>UX / UI Design</h3>
+      <p>Interfaces aligned with our people-first philosophy — intuitive, beautiful and conversion-focused.</p>
+      <div class="tags"><span>Figma</span><span>Design Systems</span><span>Prototyping</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">⚡</div>
+      <h3>Frontend Development</h3>
+      <p>Lightning-fast user experiences built with modern frameworks and battle-tested patterns.</p>
+      <div class="tags"><span>React</span><span>Angular</span><span>TypeScript</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🛠️</div>
+      <h3>Backend Development</h3>
+      <p>Robust, scalable architectures engineered to handle your most demanding business workflows.</p>
+      <div class="tags"><span>.NET</span><span>Java</span><span>Python</span><span>Node.js</span><span>Erlang</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📱</div>
+      <h3>Mobile Apps</h3>
+      <p>Native-feeling mobile solutions that delight users on every platform they choose.</p>
+      <div class="tags"><span>iOS</span><span>Android</span><span>Cross-platform</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🤝</div>
+      <h3>Team Augmentation</h3>
+      <p>Plug skilled European specialists straight into your team. Scale up without slowing down.</p>
+      <div class="tags"><span>Senior talent</span><span>Flexible engagement</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔌</div>
+      <h3>System Integrations</h3>
+      <p>REST/SOAP APIs, complex business processes and seamless connections across legacy and modern systems.</p>
+      <div class="tags"><span>REST</span><span>SOAP</span><span>Microservices</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔐</div>
+      <h3>Embedded & Security</h3>
+      <p>Firmware for access & control devices, including locks and Open Security Standard solutions.</p>
+      <div class="tags"><span>Firmware</span><span>OSS</span><span>IoT</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">☁️</div>
+      <h3>Cloud & Databases</h3>
+      <p>From relational SQL to global cloud infrastructure — we own the entire data layer.</p>
+      <div class="tags"><span>AWS</span><span>Azure</span><span>GCP</span><span>PostgreSQL</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="tech" class="tech-section">
+  <span class="section-tag">Technologies</span>
+  <h2 class="section-title">Tech stacks we know inside out</h2>
+  <p class="section-subtitle">We pick the right tool for every job — never the trendiest, always the best fit.</p>
+
+  <div class="tech-grid">
+    <div class="tech-item">React</div>
+    <div class="tech-item">Angular</div>
+    <div class="tech-item">TypeScript</div>
+    <div class="tech-item">.NET / C#</div>
+    <div class="tech-item">Java</div>
+    <div class="tech-item">Python</div>
+    <div class="tech-item">Node.js</div>
+    <div class="tech-item">Erlang</div>
+    <div class="tech-item">MS SQL</div>
+    <div class="tech-item">Oracle</div>
+    <div class="tech-item">PostgreSQL</div>
+    <div class="tech-item">AWS</div>
+    <div class="tech-item">Azure</div>
+    <div class="tech-item">GCP</div>
+    <div class="tech-item">Pebble</div>
+  </div>
+</section>
+
+<section id="why">
+  <span class="section-tag">Why People More</span>
+  <h2 class="section-title">Built by developers, for the people who use what we build.</h2>
+  <p class="section-subtitle">Our founders are engineers and designers themselves. That changes everything.</p>
+
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-num">01</div>
+      <h3>Engineers leading engineers</h3>
+      <p>Our founders speak the language of code. No translators needed — just direct, honest communication that ships great products.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">02</div>
+      <h3>People-first by design</h3>
+      <p>We treat employees with deep respect, and that energy shows up in every pixel and every line of code we deliver.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">03</div>
+      <h3>Two decades of pedigree</h3>
+      <p>Born from Insignia, one of Poland's oldest interactive agencies. Stability and senior expertise are baked in.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">04</div>
+      <h3>Truly global delivery</h3>
+      <p>Our teams support clients across Europe, North America and beyond — with European quality standards and time zone flexibility.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">05</div>
+      <h3>Flat hierarchy</h3>
+      <p>You talk directly to the decision makers. No layers, no bureaucracy, no surprises.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">06</div>
+      <h3>Your success is the brief</h3>
+      <p>SME, enterprise or startup — we tailor engagement models around your business goals, not our process.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="cta-section">
+  <div class="cta-box">
+    <h2>Let's build something people<br>actually want to use.</h2>
+    <p>Tell us about your project. First conversation is free, candid, and on us.</p>
+    <button class="btn-primary" onclick="window.location.href='mailto:hello@peoplemore.pl'">Get in touch</button>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <h4>People More P.S.A.</h4>
+      <p>A Polish software house from Kraków, building software that feels human.</p>
+    </div>
+    <div>
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Software Development</a></li>
+        <li><a href="#services">Team Augmentation</a></li>
+        <li><a href="#services">System Integrations</a></li>
+        <li><a href="#services">Embedded Systems</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#why">Why us</a></li>
+        <li><a href="#tech">Technologies</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Get in touch</h4>
+      <ul>
+        <li>Kraków, Poland</li>
+        <li><a href="mailto:hello@peoplemore.pl">hello@peoplemore.pl</a></li>
+      </ul>
+    </div>
+  </div>
+  <p>© 2026 People More P.S.A. — An Insignia company. All rights reserved.</p>
+</footer>
+
+<script>
+  // Smooth scroll for nav links
+  document.querySelectorAll('nav .menu a').forEach(link => {
+    link.addEventListener('click', e => {
+      const href = link.getAttribute('href');
+      if (href.startsWith('#')) {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Animate stats on scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.service-card, .why-card, .tech-item').forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.animationDelay = `${i * 0.05}s`;
+    observer.observe(el);
+  });
+
+  // Nav scroll effect
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      nav.style.padding = '14px 60px';
+      nav.style.background = 'rgba(10, 10, 15, 0.9)';
+    } else {
+      nav.style.padding = '20px 60px';
+      nav.style.background = 'rgba(10, 10, 15, 0.7)';
+    }
+  });
+</script>
+</body>
+</html>

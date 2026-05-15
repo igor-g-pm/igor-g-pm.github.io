@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>People More | Software Built For People</title>
+  <meta name="description" content="People More creates intuitive software and high-performing teams for SMEs and global organizations." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f3f7fb;
+      --ink: #172235;
+      --muted: #4b6077;
+      --paper: #ffffff;
+      --line: #d9e4ef;
+      --brand: #0f8fdd;
+      --brand-2: #22c97f;
+      --night: #102033;
+      --radius: 20px;
+      --shadow: 0 22px 44px rgba(20, 39, 63, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Bricolage Grotesque", sans-serif;
+      color: var(--ink);
+      line-height: 1.55;
+      background:
+        linear-gradient(170deg, #e7f3ff 0%, transparent 35%),
+        linear-gradient(15deg, #ecfff7 0%, transparent 30%),
+        var(--bg);
+    }
+
+    .container {
+      width: min(1120px, 92vw);
+      margin: 0 auto;
+    }
+
+    .banner {
+      background: var(--night);
+      color: #dce8f4;
+      border-bottom: 1px solid rgba(220, 232, 244, 0.18);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.79rem;
+      letter-spacing: 0.03em;
+    }
+
+    .banner .container {
+      padding: 8px 0;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .top {
+      padding: 22px 0;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .logo-wrap {
+      display: inline-flex;
+      align-items: center;
+      padding: 9px 10px;
+      border-radius: 12px;
+      background: var(--night);
+    }
+
+    .logo-wrap svg {
+      width: 142px;
+      height: auto;
+    }
+
+    .menu {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .menu a {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    .menu .cta {
+      background: linear-gradient(120deg, var(--brand), #34a7f3);
+      color: #fff;
+      border-radius: 11px;
+      padding: 10px 14px;
+      box-shadow: 0 16px 28px rgba(15, 143, 221, 0.28);
+    }
+
+    .hero {
+      padding: 34px 0 42px;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .badge {
+      display: inline-block;
+      font-family: "IBM Plex Mono", monospace;
+      border-radius: 999px;
+      border: 1px solid #bfd3e7;
+      background: #fff;
+      padding: 5px 10px;
+      font-size: 0.76rem;
+      color: #3d5874;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: clamp(2.1rem, 4.5vw, 4rem);
+      line-height: 1.04;
+      margin-bottom: 14px;
+      max-width: 16ch;
+    }
+
+    .hero p {
+      color: var(--muted);
+      margin-bottom: 18px;
+      max-width: 58ch;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .btn {
+      text-decoration: none;
+      padding: 11px 15px;
+      border-radius: 11px;
+      font-weight: 700;
+      transition: 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn.primary {
+      background: linear-gradient(110deg, var(--brand-2), #74f8bd);
+      color: #073623;
+    }
+
+    .btn.ghost {
+      border-color: #bed0e2;
+      color: var(--ink);
+      background: #fff;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .hero-highlights {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .hero-highlights span {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.75rem;
+      color: #3a5572;
+      border-radius: 999px;
+      padding: 5px 9px;
+      border: 1px solid #c6d7e8;
+      background: #fff;
+    }
+
+    .spotlight {
+      border-radius: var(--radius);
+      background: linear-gradient(170deg, #102033 0%, #163251 70%);
+      color: #f2f8ff;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .spotlight::after {
+      content: "";
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      right: -80px;
+      bottom: -70px;
+      background: radial-gradient(circle, rgba(34, 201, 127, 0.55), transparent 68%);
+      pointer-events: none;
+    }
+
+    .spotlight h2 {
+      font-size: 1.15rem;
+      margin-bottom: 12px;
+    }
+
+    .quote {
+      min-height: 108px;
+      margin-bottom: 12px;
+      color: #d8e9f8;
+    }
+
+    .quote p {
+      margin-bottom: 8px;
+    }
+
+    .quote strong {
+      color: #fff;
+      font-size: 0.95rem;
+    }
+
+    .dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 99px;
+      background: rgba(226, 240, 251, 0.34);
+    }
+
+    .dot.active {
+      background: #74f8bd;
+    }
+
+    section {
+      padding: 28px 0;
+    }
+
+    .title {
+      font-size: clamp(1.5rem, 3vw, 2.3rem);
+      margin-bottom: 8px;
+    }
+
+    .sub {
+      color: var(--muted);
+      max-width: 70ch;
+      margin-bottom: 16px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      margin-bottom: 8px;
+      font-size: 1.03rem;
+    }
+
+    .card p {
+      font-size: 0.94rem;
+      color: var(--muted);
+    }
+
+    .tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tech span {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.76rem;
+      color: #3e5770;
+    }
+
+    .contact {
+      margin-top: 4px;
+      border-radius: var(--radius);
+      background: #fff;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .contact form {
+      display: grid;
+      gap: 8px;
+    }
+
+    .contact input,
+    .contact textarea,
+    .contact select {
+      width: 100%;
+      border: 1px solid #c5d8ea;
+      border-radius: 10px;
+      padding: 10px;
+      font: inherit;
+      background: #fcfeff;
+    }
+
+    .contact textarea {
+      min-height: 88px;
+      resize: vertical;
+    }
+
+    .contact button {
+      border: 0;
+      border-radius: 10px;
+      background: linear-gradient(110deg, var(--brand), #4cb5f6);
+      color: #fff;
+      padding: 11px 14px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .contact-note {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .status {
+      min-height: 1.2em;
+      font-size: 0.9rem;
+      color: #0f8fdd;
+    }
+
+    footer {
+      padding: 24px 0 38px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .cards,
+      .contact {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        max-width: none;
+      }
+
+      .menu {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="banner">
+    <div class="container">
+      <span>People More P.S.A. | Krakow, Poland</span>
+      <span>100% remote-friendly collaboration model</span>
+    </div>
+  </div>
+
+  <div class="top">
+    <div class="container nav">
+      <a class="logo-wrap" href="#home">
+        <svg role="img" aria-labelledby="peoplemore-logo" id="navlogo" xmlns="http://www.w3.org/2000/svg" width="142.644" height="33" viewBox="0 0 142.644 32.658"><title id="peoplemore-logo">PeopeMore main page</title><g id="Group_1772" data-name="Group 1772" transform="translate(-102.084 -810.724)"><path id="Rectangle_1" data-name="Rectangle 1" d="M-1-1H141.644V31.658H-1ZM139.644,1H1V29.658H139.644Z" transform="translate(103.084 811.724)" fill="#fff"></path><g id="Group_1" data-name="Group 1" transform="translate(111.429 819.442)"><path id="Path_1" data-name="Path 1" d="M113.152,827.6v5.279h-2.84V818.653h5.177a5.344,5.344,0,0,1,3.8,1.209,4.3,4.3,0,0,1,1.279,3.285,4.183,4.183,0,0,1-1.32,3.243,5.365,5.365,0,0,1-3.757,1.208Zm4.533-4.451a2.169,2.169,0,0,0-.584-1.633,2.7,2.7,0,0,0-1.914-.563h-2.034v4.371h2.034Q117.685,825.321,117.685,823.146Z" transform="translate(-110.312 -818.371)" fill="#fff"></path><path id="Path_2" data-name="Path 2" d="M123.2,820.909V824.6h5.036v2.176H123.2V830.6h5.641v2.277h-8.481V818.653h8.481v2.256Z" transform="translate(-108.759 -818.371)" fill="#fff"></path><path id="Path_3" data-name="Path 3" d="M139.429,819.406a6.728,6.728,0,0,1,2.558,2.587,8.028,8.028,0,0,1,0,7.525,6.7,6.7,0,0,1-2.558,2.6,7.515,7.515,0,0,1-7.232,0,6.7,6.7,0,0,1-2.558-2.6,8.028,8.028,0,0,1,0-7.525,6.72,6.72,0,0,1,2.558-2.587,7.516,7.516,0,0,1,7.232,0Zm-5.812,2.256a3.855,3.855,0,0,0-1.48,1.622,5.964,5.964,0,0,0,0,4.935,3.852,3.852,0,0,0,1.48,1.621,4.552,4.552,0,0,0,4.392,0,3.852,3.852,0,0,0,1.48-1.621,5.963,5.963,0,0,0,0-4.935,3.855,3.855,0,0,0-1.48-1.622,4.553,4.553,0,0,0-4.392,0Z" transform="translate(-107.471 -818.398)" fill="#fff"></path><path id="Path_4" data-name="Path 4" d="M145.275,827.6v5.279h-2.84V818.653h5.177a5.344,5.344,0,0,1,3.8,1.209,4.3,4.3,0,0,1,1.279,3.285,4.183,4.183,0,0,1-1.32,3.243,5.366,5.366,0,0,1-3.757,1.208Zm4.532-4.451a2.169,2.169,0,0,0-.584-1.633,2.7,2.7,0,0,0-1.914-.563h-2.034v4.371h2.034Q149.808,825.321,149.808,823.146Z" transform="translate(-105.349 -818.371)" fill="#fff"></path><path id="Path_5" data-name="Path 5" d="M155.325,830.7H160.1v2.176h-7.615V818.653h2.84Z" transform="translate(-103.797 -818.371)" fill="#fff"></path><path id="Path_6" data-name="Path 6" d="M162.95,820.909V824.6h5.036v2.176H162.95V830.6h5.641v2.277H160.11V818.653h8.481v2.256Z" transform="translate(-102.619 -818.371)" fill="#fff"></path><path id="Path_7" data-name="Path 7" d="M185.732,818.619v14.263h-4.451V825.77l-2.2,7.112h-3.828l-2.2-7.112v7.112H168.59V818.619h5.479l3.143,8.561,3.062-8.561Z" transform="translate(-101.309 -818.377)" fill="#fff"></path><path id="Path_8" data-name="Path 8" d="M195.437,819.347a6.962,6.962,0,0,1,2.648,2.608,7.745,7.745,0,0,1,0,7.534,7,7,0,0,1-2.659,2.618,7.642,7.642,0,0,1-7.373,0,7.075,7.075,0,0,1-2.669-2.618,7.682,7.682,0,0,1,0-7.534,7.015,7.015,0,0,1,2.669-2.608,7.736,7.736,0,0,1,7.383,0Zm-5.761,4.049a3.486,3.486,0,0,0-.726,2.326,3.45,3.45,0,0,0,.726,2.307,2.918,2.918,0,0,0,4.128,0,3.45,3.45,0,0,0,.726-2.307,3.486,3.486,0,0,0-.726-2.326,2.915,2.915,0,0,0-4.128,0Z" transform="translate(-98.867 -818.409)" fill="#fff"></path><path id="Path_9" data-name="Path 9" d="M205.232,832.882l-2.7-5.118v5.118h-4.471V818.619h6.646a6.553,6.553,0,0,1,2.961.614,4.261,4.261,0,0,1,1.844,1.673,4.656,4.656,0,0,1,.614,2.386,4.24,4.24,0,0,1-.8,2.538,4.375,4.375,0,0,1-2.286,1.592l3.1,5.46Zm-2.7-8.1h1.773a1.4,1.4,0,0,0,.966-.292,1.4,1.4,0,0,0-.01-1.8,1.314,1.314,0,0,0-.956-.323h-1.773Z" transform="translate(-96.756 -818.377)" fill="#fff"></path><path id="Path_10" data-name="Path 10" d="M213.786,822.163v1.775h4.432V827.3h-4.432v2.015h5.037v3.566h-9.508V818.619h9.508v3.544Z" transform="translate(-95.017 -818.377)" fill="#fff"></path></g></g></svg>
+      </a>
+      <nav class="menu">
+        <a href="#services">Services</a>
+        <a href="#models">Models</a>
+        <a href="#contact" class="cta">Book A Call</a>
+      </nav>
+    </div>
+  </div>
+
+  <main id="home" class="container">
+    <section class="hero">
+      <div>
+        <span class="badge">Built by former developers and designers</span>
+        <h1>For People. By Engineers. Focused On Outcomes.</h1>
+        <p>People More helps companies launch and scale digital products with teams that care about usability, technical quality, and business value at the same time.</p>
+        <div class="hero-buttons">
+          <a class="btn primary" href="#contact">Get A Custom Plan</a>
+          <a class="btn ghost" href="#services">View Core Services</a>
+        </div>
+        <div class="hero-highlights">
+          <span>SME to enterprise delivery</span>
+          <span>Remote + hybrid collaboration</span>
+          <span>UX-led engineering approach</span>
+        </div>
+      </div>
+
+      <aside class="spotlight">
+        <h2>Client Voices</h2>
+        <div id="quote" class="quote" aria-live="polite"></div>
+        <div class="dots" id="dots"></div>
+      </aside>
+    </section>
+
+    <section id="services">
+      <h2 class="title">What we do best</h2>
+      <p class="sub">People More delivers full-cycle software development, IT outsourcing, and specialist consulting for integration-heavy and cloud-native products.</p>
+      <div class="cards">
+        <article class="card">
+          <h3>End-to-End Development</h3>
+          <p>From UX discovery and UI design to production-grade frontend, backend, and mobile applications.</p>
+        </article>
+        <article class="card">
+          <h3>Team Augmentation</h3>
+          <p>Boost your engineering capacity with experienced specialists who align with your team and roadmap quickly.</p>
+        </article>
+        <article class="card">
+          <h3>Consulting & Integrations</h3>
+          <p>REST/SOAP APIs, cloud architecture, database strategy, low-code workflows, and embedded solutions.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="models">
+      <h2 class="title">Engagement models that match your goals</h2>
+      <p class="sub">Choose the right setup for speed, predictability, and technical depth.</p>
+      <div class="cards">
+        <article class="card">
+          <h3>Dedicated Team</h3>
+          <p>Cross-functional product squad with delivery ownership from planning to release.</p>
+        </article>
+        <article class="card">
+          <h3>Extension Pods</h3>
+          <p>Specialists embedded into your existing engineering organization and ceremonies.</p>
+        </article>
+        <article class="card">
+          <h3>Transformation Support</h3>
+          <p>Technical modernization, architecture recovery, and process improvements for stalled products.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="title">Technical stack coverage</h2>
+      <p class="sub">Strong experience across web, backend, cloud, databases, and integration ecosystems.</p>
+      <div class="tech">
+        <span>React</span><span>Angular</span><span>TypeScript</span><span>C#/.NET</span><span>Java</span><span>Python</span><span>Node.js</span><span>Erlang</span><span>MS SQL</span><span>Oracle</span><span>PostgreSQL</span><span>AWS</span><span>Azure</span><span>GCP</span>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div>
+        <h2 class="title">Let us design your delivery roadmap</h2>
+        <p class="sub">Share your business target, current constraints, and desired timeline. We will propose an execution model that helps you move faster with less risk.</p>
+        <p><strong>People More P.S.A.</strong><br />Krakow, Poland<br />Serving clients in Poland and internationally</p>
+      </div>
+      <form id="lead" novalidate>
+        <input id="name" placeholder="Your name" required />
+        <input id="email" type="email" placeholder="Work email" required />
+        <select id="service">
+          <option>Full product build</option>
+          <option>Team extension</option>
+          <option>Systems integration</option>
+          <option>Technical consulting</option>
+        </select>
+        <textarea id="brief" placeholder="What result do you need in the next 3-6 months?" required></textarea>
+        <button type="submit">Request Strategy Call</button>
+        <p class="contact-note">Expected response time: within one business day.</p>
+        <p class="status" id="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">People More | Human-centered software engineering with enterprise-level technical capability.</div>
+  </footer>
+
+  <script>
+    const testimonials = [
+      {
+        text: "People More helped us move from delayed milestones to predictable sprint delivery in under two months.",
+        author: "Product Director, International SaaS Company"
+      },
+      {
+        text: "Their engineers integrated into our team quickly and delivered high-quality API and frontend work from day one.",
+        author: "CTO, European SME"
+      },
+      {
+        text: "The biggest win was the user focus. Our platform became easier to use while performance improved.",
+        author: "Head of Digital, Enterprise Client"
+      }
+    ];
+
+    const quoteContainer = document.getElementById("quote");
+    const dotsContainer = document.getElementById("dots");
+    let index = 0;
+
+    testimonials.forEach((_, i) => {
+      const dot = document.createElement("span");
+      dot.className = "dot";
+      dot.dataset.index = String(i);
+      dotsContainer.appendChild(dot);
+      dot.addEventListener("click", () => {
+        index = i;
+        renderQuote();
+      });
+    });
+
+    function renderQuote() {
+      const item = testimonials[index];
+      quoteContainer.innerHTML = `<p>"${item.text}"</p><strong>${item.author}</strong>`;
+      document.querySelectorAll(".dot").forEach((dot, i) => {
+        dot.classList.toggle("active", i === index);
+      });
+    }
+
+    renderQuote();
+    setInterval(() => {
+      index = (index + 1) % testimonials.length;
+      renderQuote();
+    }, 5000);
+
+    document.getElementById("lead").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const brief = document.getElementById("brief").value.trim();
+      const status = document.getElementById("status");
+
+      if (!name || !email.includes("@") || !brief) {
+        status.style.color = "#d95f55";
+        status.textContent = "Please fill in name, work email, and project brief.";
+        return;
+      }
+
+      status.style.color = "#0f8fdd";
+      status.textContent = "Thanks. Your request is ready for the People More team.";
+      event.target.reset();
+    });
+  </script>
+</body>
+</html>

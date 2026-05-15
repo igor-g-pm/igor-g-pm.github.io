@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>People More — We Code. We Design. We Deliver.</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --v1:#7c3aed;--v2:#a855f7;--v3:#ec4899;--v4:#f97316;
+  --bg:#0b0515;--bg2:#100820;--surf:rgba(255,255,255,.05);
+  --tx:#f0e6ff;--mu:rgba(240,230,255,.55);--brd:rgba(255,255,255,.1)
+}
+body{background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,'Segoe UI',sans-serif;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:999;padding:1.2rem 5%;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(11,5,21,.8);backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(124,58,237,.15);transition:.3s}
+nav.scrolled{background:rgba(11,5,21,.98)}
+.nl{display:flex;align-items:center;gap:2rem;list-style:none}
+.nl a{color:var(--mu);text-decoration:none;font-size:.87rem;transition:color .2s}
+.nl a:hover{color:var(--tx)}
+.nav-cta{background:linear-gradient(135deg,var(--v1),var(--v3));color:#fff!important;
+  padding:.52rem 1.5rem;border-radius:100px;font-weight:700!important;
+  box-shadow:0 0 20px rgba(168,85,247,.25);transition:.2s!important}
+.nav-cta:hover{box-shadow:0 0 35px rgba(168,85,247,.5)!important;transform:translateY(-1px)}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hbg span{width:22px;height:2px;background:var(--mu);border-radius:2px;display:block;transition:.3s}
+
+/* HERO */
+#hero{min-height:100vh;padding:10rem 5% 6rem;display:flex;align-items:center;position:relative;overflow:hidden}
+.mesh{position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 60% at 0% 50%,rgba(124,58,237,.18) 0%,transparent 65%),
+             radial-gradient(ellipse 60% 55% at 100% 10%,rgba(236,72,153,.14) 0%,transparent 60%),
+             radial-gradient(ellipse 50% 50% at 50% 100%,rgba(249,115,22,.1) 0%,transparent 60%)}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);animation:float 8s ease-in-out infinite}
+.orb1{width:400px;height:400px;background:rgba(124,58,237,.2);top:-15%;left:-10%;animation-delay:0s}
+.orb2{width:350px;height:350px;background:rgba(236,72,153,.15);bottom:-10%;right:-5%;animation-delay:-3s}
+.orb3{width:250px;height:250px;background:rgba(249,115,22,.1);top:30%;right:20%;animation-delay:-5s}
+@keyframes float{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-30px) scale(1.05)}}
+.hc{position:relative;z-index:2;max-width:900px}
+.hline{display:inline-flex;align-items:center;gap:10px;margin-bottom:2.5rem}
+.hline-bar{width:32px;height:3px;background:linear-gradient(90deg,var(--v1),var(--v3));border-radius:2px}
+.hline-txt{font-size:.78rem;color:var(--mu);text-transform:uppercase;letter-spacing:.15em}
+h1{font-size:clamp(3rem,7vw,6.5rem);font-weight:900;line-height:.95;letter-spacing:-.04em;margin-bottom:2rem}
+.h1-row{display:block;overflow:hidden}
+.h1-row.r1{color:var(--tx)}
+.h1-row.r2{background:linear-gradient(135deg,var(--v2),var(--v3));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.h1-row.r3{color:var(--tx)}
+.lead{font-size:1.15rem;color:var(--mu);line-height:1.8;max-width:620px;margin-bottom:3rem}
+.hbtns{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+.btn-grad{background:linear-gradient(135deg,var(--v1),var(--v3));color:#fff;
+  padding:1rem 2.8rem;border-radius:100px;font-weight:700;text-decoration:none;font-size:1rem;
+  box-shadow:0 0 40px rgba(168,85,247,.3);transition:.25s;display:inline-block}
+.btn-grad:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 0 60px rgba(168,85,247,.5)}
+.btn-ghost{color:var(--tx);text-decoration:none;font-size:.95rem;font-weight:600;
+  display:flex;align-items:center;gap:.5rem;transition:.2s}
+.btn-ghost:hover{color:var(--v2)}
+.btn-ghost .arr{transition:transform .2s}
+.btn-ghost:hover .arr{transform:translateX(4px)}
+.hero-marquee{margin-top:6rem;overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,black 10%,black 90%,transparent)}
+.marquee-track{display:flex;gap:2rem;width:max-content;animation:marquee 22s linear infinite}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.mtag{background:rgba(255,255,255,.05);border:1px solid var(--brd);border-radius:100px;
+  padding:.4rem 1.2rem;font-size:.82rem;color:var(--mu);white-space:nowrap}
+
+/* SERVICES */
+#services{padding:8rem 5%;background:var(--bg2)}
+.sh{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:2rem;margin-bottom:4rem}
+.sh-left h2{font-size:clamp(1.8rem,3.2vw,3rem);font-weight:900;letter-spacing:-.03em;margin-bottom:0}
+.sh-left .sl{font-size:.76rem;color:var(--v2);text-transform:uppercase;letter-spacing:.18em;margin-bottom:.7rem}
+.sh-right{max-width:380px;color:var(--mu);font-size:.95rem;line-height:1.72}
+.sg{display:grid;grid-template-columns:repeat(12,1fr);gap:1.2rem}
+.sc-big{grid-column:span 7}
+.sc-sm{grid-column:span 5}
+.sc{background:var(--surf);border:1px solid var(--brd);border-radius:16px;padding:2.2rem;
+  transition:.3s;position:relative;overflow:hidden}
+.sc::after{content:'';position:absolute;inset:0;border-radius:16px;opacity:0;
+  background:linear-gradient(135deg,rgba(124,58,237,.12),rgba(236,72,153,.08));transition:.3s}
+.sc:hover{transform:translateY(-4px);border-color:rgba(168,85,247,.35)}
+.sc:hover::after{opacity:1}
+.sc-inner{position:relative;z-index:1}
+.si{font-size:2.2rem;margin-bottom:1.4rem;display:block}
+.sc h3{font-size:1.1rem;font-weight:800;margin-bottom:.7rem;letter-spacing:-.01em}
+.sc p{color:var(--mu);font-size:.9rem;line-height:1.7;margin-bottom:1.4rem}
+.stags{display:flex;flex-wrap:wrap;gap:6px}
+.stag{background:rgba(168,85,247,.12);border:1px solid rgba(168,85,247,.25);
+  color:var(--v2);font-size:.71rem;padding:3px 9px;border-radius:6px;font-weight:600}
+.sc-accent .stag{background:rgba(236,72,153,.12);border-color:rgba(236,72,153,.25);color:var(--v3)}
+.sc-orange .stag{background:rgba(249,115,22,.12);border-color:rgba(249,115,22,.25);color:var(--v4)}
+
+/* MANIFESTO */
+#manifesto{padding:8rem 5%;text-align:center;position:relative;overflow:hidden}
+#manifesto::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 40% at 50% 50%,rgba(124,58,237,.1) 0%,transparent 70%)}
+.mq{position:relative;z-index:1;max-width:800px;margin:0 auto}
+.mq .quote{font-size:clamp(1.5rem,3vw,2.5rem);font-weight:800;line-height:1.35;
+  letter-spacing:-.02em;color:var(--tx);margin-bottom:2rem}
+.mq .quote em{font-style:normal;background:linear-gradient(135deg,var(--v2),var(--v3));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.mq .author{color:var(--mu);font-size:.88rem}
+.mq .author strong{color:var(--tx)}
+
+/* ABOUT */
+#about{padding:8rem 5%;background:var(--bg2)}
+.abg{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.abt-l .sl{font-size:.76rem;color:var(--v2);text-transform:uppercase;letter-spacing:.18em;margin-bottom:.7rem}
+.abt-l h2{font-size:clamp(1.8rem,3vw,2.8rem);font-weight:900;letter-spacing:-.025em;margin-bottom:1.5rem}
+.abt-l p{color:var(--mu);font-size:1rem;line-height:1.82;margin-bottom:1.3rem}
+.abt-l strong{color:var(--tx)}
+.abt-r{display:grid;gap:1.2rem}
+.acard{background:var(--surf);border:1px solid var(--brd);border-radius:14px;padding:1.8rem;
+  transition:.2s;display:flex;align-items:flex-start;gap:1.2rem}
+.acard:hover{border-color:rgba(168,85,247,.3);background:rgba(168,85,247,.05)}
+.acard-ico{width:44px;height:44px;border-radius:10px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--v1),var(--v2));display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+.acard h4{font-size:.95rem;font-weight:700;margin-bottom:.35rem}
+.acard p{color:var(--mu);font-size:.85rem;line-height:1.62;margin:0}
+
+/* PROCESS */
+#process{padding:8rem 5%}
+.pg{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;margin-top:4rem;position:relative}
+.pg::before{content:'';position:absolute;top:32px;left:calc(10% + 16px);right:calc(10% + 16px);
+  height:1px;background:linear-gradient(90deg,var(--v1),var(--v3));opacity:.3}
+.pstep{padding:0 1.5rem;text-align:center;position:relative;z-index:1}
+.pnum{width:64px;height:64px;border-radius:50%;margin:0 auto 1.5rem;display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;font-weight:900;background:var(--bg2);border:2px solid var(--v1);
+  position:relative;transition:.3s}
+.pstep:nth-child(2) .pnum{border-color:var(--v2)}
+.pstep:nth-child(3) .pnum{border-color:var(--v3)}
+.pstep:nth-child(4) .pnum{border-color:var(--v4)}
+.pstep:hover .pnum{background:linear-gradient(135deg,var(--v1),var(--v3));border-color:transparent}
+.pstep h3{font-size:.95rem;font-weight:700;margin-bottom:.5rem}
+.pstep p{color:var(--mu);font-size:.83rem;line-height:1.65}
+
+/* TEAM STACK */
+#stack{padding:7rem 5%;background:var(--bg2)}
+.stack-inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.si-l h2{font-size:clamp(1.8rem,3vw,2.8rem);font-weight:900;letter-spacing:-.025em;margin-bottom:1rem}
+.si-l p{color:var(--mu);font-size:1rem;line-height:1.8;margin-bottom:2rem}
+.si-l .sl{font-size:.76rem;color:var(--v2);text-transform:uppercase;letter-spacing:.18em;margin-bottom:.7rem}
+.stack-pills{display:flex;flex-wrap:wrap;gap:.6rem}
+.sp{padding:.5rem 1.1rem;border-radius:100px;font-size:.82rem;font-weight:600;transition:.2s;cursor:default}
+.sp-v{background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.3);color:var(--v2)}
+.sp-v:hover{background:rgba(124,58,237,.3)}
+.sp-p{background:rgba(236,72,153,.12);border:1px solid rgba(236,72,153,.25);color:var(--v3)}
+.sp-p:hover{background:rgba(236,72,153,.25)}
+.sp-o{background:rgba(249,115,22,.12);border:1px solid rgba(249,115,22,.22);color:var(--v4)}
+.sp-o:hover{background:rgba(249,115,22,.22)}
+.si-r{background:var(--surf);border:1px solid var(--brd);border-radius:20px;padding:2.5rem}
+.si-r h3{font-size:.85rem;color:var(--mu);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1.5rem}
+.scard{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem;background:rgba(255,255,255,.04);
+  border-radius:10px;margin-bottom:.8rem;border:1px solid rgba(255,255,255,.06);transition:.2s}
+.scard:last-child{margin-bottom:0}
+.scard:hover{border-color:rgba(168,85,247,.25)}
+.scard-ico{font-size:1.5rem}
+.scard h4{font-size:.88rem;font-weight:700;margin-bottom:.15rem}
+.scard p{color:var(--mu);font-size:.78rem;margin:0}
+
+/* CTA */
+#contact{padding:10rem 5%;position:relative;overflow:hidden}
+.cta-bg{position:absolute;inset:0;background:linear-gradient(135deg,rgba(124,58,237,.25) 0%,rgba(236,72,153,.15) 50%,rgba(249,115,22,.12) 100%)}
+.cta-bg::after{content:'';position:absolute;inset:1px;background:var(--bg);border-radius:0}
+.ctc{position:relative;z-index:2;max-width:700px;margin:0 auto;text-align:center}
+#contact h2{font-size:clamp(2.2rem,4.5vw,4rem);font-weight:900;letter-spacing:-.035em;margin-bottom:1.3rem;line-height:1.05}
+#contact h2 span{background:linear-gradient(135deg,var(--v2),var(--v3));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+#contact p{color:var(--mu);font-size:1.1rem;max-width:520px;margin:0 auto 3rem;line-height:1.78}
+.ce-block{display:inline-block;padding:1rem 2.5rem;background:rgba(255,255,255,.05);
+  border:1px solid var(--brd);border-radius:12px;margin-bottom:2rem;transition:.2s}
+.ce-block:hover{border-color:rgba(168,85,247,.4);background:rgba(168,85,247,.08)}
+.ce{font-size:1.3rem;font-weight:700;color:var(--tx);text-decoration:none;display:block;margin-bottom:.3rem}
+.ce-sub{color:var(--mu);font-size:.82rem}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-outline{border:1px solid var(--brd);color:var(--tx);padding:.95rem 2.4rem;
+  border-radius:100px;font-weight:600;text-decoration:none;font-size:.95rem;transition:.2s}
+.btn-outline:hover{border-color:rgba(168,85,247,.5);background:rgba(168,85,247,.08)}
+
+/* FOOTER */
+footer{padding:3rem 5%;background:var(--bg2);border-top:1px solid var(--brd);
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+footer p{color:var(--mu);font-size:.8rem}
+.fl{display:flex;gap:1.5rem}
+.fl a{color:var(--mu);text-decoration:none;font-size:.8rem;transition:color .2s}
+.fl a:hover{color:var(--tx)}
+
+/* ANIMATIONS */
+.fade{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
+.fade.visible{opacity:1;transform:translateY(0)}
+.fade-l{opacity:0;transform:translateX(-24px);transition:opacity .65s ease,transform .65s ease}
+.fade-l.visible{opacity:1;transform:translateX(0)}
+.fade-d1{transition-delay:.08s}.fade-d2{transition-delay:.16s}.fade-d3{transition-delay:.24s}
+.fade-d4{transition-delay:.32s}.fade-d5{transition-delay:.4s}
+
+@media(max-width:1000px){
+  .sc-big,.sc-sm{grid-column:span 12}
+  .sg{grid-template-columns:1fr}
+  .abg,.stack-inner{grid-template-columns:1fr;gap:3rem}
+  .pg::before{display:none}
+}
+@media(max-width:640px){
+  nav .nl{display:none}
+  nav .nl.open{display:flex;flex-direction:column;position:fixed;top:65px;left:0;right:0;
+    background:var(--bg2);padding:2rem;gap:1.5rem;border-bottom:1px solid var(--brd)}
+  .hbg{display:flex}
+  #hero,#services,#about,#process,#stack,#contact{padding-top:5rem;padding-bottom:5rem}
+  .pstep{margin-bottom:2rem}
+  footer{flex-direction:column;text-align:center}
+  .fl{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <svg role="img" aria-labelledby="pm3" xmlns="http://www.w3.org/2000/svg" width="130" height="30" viewBox="0 0 142.644 32.658"><title id="pm3">People More</title><g transform="translate(-102.084 -810.724)"><path d="M-1-1H141.644V31.658H-1ZM139.644,1H1V29.658H139.644Z" transform="translate(103.084 811.724)" fill="#fff"/><g transform="translate(111.429 819.442)"><path d="M113.152,827.6v5.279h-2.84V818.653h5.177a5.344,5.344,0,0,1,3.8,1.209,4.3,4.3,0,0,1,1.279,3.285,4.183,4.183,0,0,1-1.32,3.243,5.365,5.365,0,0,1-3.757,1.208Zm4.533-4.451a2.169,2.169,0,0,0-.584-1.633,2.7,2.7,0,0,0-1.914-.563h-2.034v4.371h2.034Q117.685,825.321,117.685,823.146Z" transform="translate(-110.312 -818.371)" fill="#fff"/><path d="M123.2,820.909V824.6h5.036v2.176H123.2V830.6h5.641v2.277h-8.481V818.653h8.481v2.256Z" transform="translate(-108.759 -818.371)" fill="#fff"/><path d="M139.429,819.406a6.728,6.728,0,0,1,2.558,2.587,8.028,8.028,0,0,1,0,7.525,6.7,6.7,0,0,1-2.558,2.6,7.515,7.515,0,0,1-7.232,0,6.7,6.7,0,0,1-2.558-2.6,8.028,8.028,0,0,1,0-7.525,6.72,6.72,0,0,1,2.558-2.587,7.516,7.516,0,0,1,7.232,0Zm-5.812,2.256a3.855,3.855,0,0,0-1.48,1.622,5.964,5.964,0,0,0,0,4.935,3.852,3.852,0,0,0,1.48,1.621,4.552,4.552,0,0,0,4.392,0,3.852,3.852,0,0,0,1.48-1.621,5.963,5.963,0,0,0,0-4.935,3.855,3.855,0,0,0-1.48-1.622,4.553,4.553,0,0,0-4.392,0Z" transform="translate(-107.471 -818.398)" fill="#fff"/><path d="M145.275,827.6v5.279h-2.84V818.653h5.177a5.344,5.344,0,0,1,3.8,1.209,4.3,4.3,0,0,1,1.279,3.285,4.183,4.183,0,0,1-1.32,3.243,5.366,5.366,0,0,1-3.757,1.208Zm4.532-4.451a2.169,2.169,0,0,0-.584-1.633,2.7,2.7,0,0,0-1.914-.563h-2.034v4.371h2.034Q149.808,825.321,149.808,823.146Z" transform="translate(-105.349 -818.371)" fill="#fff"/><path d="M155.325,830.7H160.1v2.176h-7.615V818.653h2.84Z" transform="translate(-103.797 -818.371)" fill="#fff"/><path d="M162.95,820.909V824.6h5.036v2.176H162.95V830.6h5.641v2.277H160.11V818.653h8.481v2.256Z" transform="translate(-102.619 -818.371)" fill="#fff"/><path d="M185.732,818.619v14.263h-4.451V825.77l-2.2,7.112h-3.828l-2.2-7.112v7.112H168.59V818.619h5.479l3.143,8.561,3.062-8.561Z" transform="translate(-101.309 -818.377)" fill="#fff"/><path d="M195.437,819.347a6.962,6.962,0,0,1,2.648,2.608,7.745,7.745,0,0,1,0,7.534,7,7,0,0,1-2.659,2.618,7.642,7.642,0,0,1-7.373,0,7.075,7.075,0,0,1-2.669-2.618,7.682,7.682,0,0,1,0-7.534,7.015,7.015,0,0,1,2.669-2.608,7.736,7.736,0,0,1,7.383,0Zm-5.761,4.049a3.486,3.486,0,0,0-.726,2.326,3.45,3.45,0,0,0,.726,2.307,2.918,2.918,0,0,0,4.128,0,3.45,3.45,0,0,0,.726-2.307,3.486,3.486,0,0,0-.726-2.326,2.915,2.915,0,0,0-4.128,0Z" transform="translate(-98.867 -818.409)" fill="#fff"/><path d="M205.232,832.882l-2.7-5.118v5.118h-4.471V818.619h6.646a6.553,6.553,0,0,1,2.961.614,4.261,4.261,0,0,1,1.844,1.673,4.656,4.656,0,0,1,.614,2.386,4.24,4.24,0,0,1-.8,2.538,4.375,4.375,0,0,1-2.286,1.592l3.1,5.46Zm-2.7-8.1h1.773a1.4,1.4,0,0,0,.966-.292,1.4,1.4,0,0,0-.01-1.8,1.314,1.314,0,0,0-.956-.323h-1.773Z" transform="translate(-96.756 -818.377)" fill="#fff"/><path d="M213.786,822.163v1.775h4.432V827.3h-4.432v2.015h5.037v3.566h-9.508V818.619h9.508v3.544Z" transform="translate(-95.017 -818.377)" fill="#fff"/></g></g></svg>
+  <ul class="nl" id="nl">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#stack">Tech</a></li>
+    <li><a href="#contact" class="nav-cta">Let's Talk</a></li>
+  </ul>
+  <button class="hbg" id="hbg" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<section id="hero">
+  <div class="mesh"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+  <div class="hc">
+    <div class="hline"><span class="hline-bar"></span><span class="hline-txt">People More P.S.A. · Kraków, Poland</span></div>
+    <h1>
+      <span class="h1-row r1">We Code.</span>
+      <span class="h1-row r2">We Design.</span>
+      <span class="h1-row r3">We Deliver.</span>
+    </h1>
+    <p class="lead">A Kraków software house where former developers and designers build digital products that matter — for startups scaling fast, corporations moving faster, and partners who expect the extraordinary.</p>
+    <div class="hbtns">
+      <a href="#contact" class="btn-grad">Start Building</a>
+      <a href="#services" class="btn-ghost">Explore what we do <span class="arr">→</span></a>
+    </div>
+    <div class="hero-marquee">
+      <div class="marquee-track">
+        <span class="mtag">React</span><span class="mtag">C#/.NET</span><span class="mtag">TypeScript</span>
+        <span class="mtag">Python</span><span class="mtag">Node.js</span><span class="mtag">AWS</span>
+        <span class="mtag">Erlang</span><span class="mtag">Azure</span><span class="mtag">Java</span>
+        <span class="mtag">Angular</span><span class="mtag">GCP</span><span class="mtag">PostgreSQL</span>
+        <span class="mtag">UX Design</span><span class="mtag">Embedded FW</span><span class="mtag">Pebble</span>
+        <span class="mtag">React</span><span class="mtag">C#/.NET</span><span class="mtag">TypeScript</span>
+        <span class="mtag">Python</span><span class="mtag">Node.js</span><span class="mtag">AWS</span>
+        <span class="mtag">Erlang</span><span class="mtag">Azure</span><span class="mtag">Java</span>
+        <span class="mtag">Angular</span><span class="mtag">GCP</span><span class="mtag">PostgreSQL</span>
+        <span class="mtag">UX Design</span><span class="mtag">Embedded FW</span><span class="mtag">Pebble</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="sh fade">
+    <div class="sh-left">
+      <p class="sl">What We Build</p>
+      <h2>Full-Stack Digital<br>Products & Teams</h2>
+    </div>
+    <div class="sh-right">From first sketch to production deployment — and the engineers to staff your team when you need to move faster. We're a complete technology partner, not a single-discipline vendor.</div>
+  </div>
+  <div class="sg">
+    <div class="sc sc-big fade fade-d1">
+      <div class="sc-inner">
+        <span class="si">⚡</span>
+        <h3>Frontend Engineering</h3>
+        <p>Interfaces people actually enjoy using. We build high-performance, accessible frontends with modern frameworks — treating performance, animations, and state management as first-class concerns, not afterthoughts.</p>
+        <div class="stags"><span class="stag">React</span><span class="stag">Angular</span><span class="stag">TypeScript</span><span class="stag">Web Performance</span><span class="stag">Accessibility</span></div>
+      </div>
+    </div>
+    <div class="sc sc-sm sc-accent fade fade-d2">
+      <div class="sc-inner">
+        <span class="si">🎨</span>
+        <h3>UX / UI Design</h3>
+        <p>Our founders came from design. We don't bolt it on — we start with it. Research-driven interfaces with design systems that scale with your product.</p>
+        <div class="stags"><span class="stag">UX Research</span><span class="stag">Design Systems</span><span class="stag">Figma</span></div>
+      </div>
+    </div>
+    <div class="sc sc-sm fade fade-d1">
+      <div class="sc-inner">
+        <span class="si">🏗️</span>
+        <h3>Backend Architecture</h3>
+        <p>Distributed systems, APIs, and microservices built to scale. We work across the full backend stack with genuine depth in each runtime.</p>
+        <div class="stags"><span class="stag">C#/.NET</span><span class="stag">Java</span><span class="stag">Python</span><span class="stag">Node.js</span><span class="stag">Erlang</span></div>
+      </div>
+    </div>
+    <div class="sc sc-big sc-orange fade fade-d2">
+      <div class="sc-inner">
+        <span class="si">🔗</span>
+        <h3>Integrations, Embedded & Cloud</h3>
+        <p>From REST/SOAP API design to embedded firmware for access-control hardware — we connect complex systems. We also architect and operate multi-cloud environments on AWS, Azure, and GCP, with enterprise database expertise across MS SQL, Oracle, and PostgreSQL. We also deliver Pebble-based low-code/no-code workflows.</p>
+        <div class="stags"><span class="stag">REST / SOAP</span><span class="stag">Embedded FW</span><span class="stag">AWS</span><span class="stag">Azure</span><span class="stag">GCP</span><span class="stag">Pebble</span><span class="stag">MS SQL</span><span class="stag">Oracle</span></div>
+      </div>
+    </div>
+    <div class="sc fade fade-d1" style="grid-column:span 6">
+      <div class="sc-inner">
+        <span class="si">📱</span>
+        <h3>Mobile Development</h3>
+        <p>Apps for the platforms your users live on. Native performance, cross-platform pragmatism — we choose the right approach for your market and budget.</p>
+        <div class="stags"><span class="stag">iOS</span><span class="stag">Android</span><span class="stag">Cross-Platform</span></div>
+      </div>
+    </div>
+    <div class="sc sc-accent fade fade-d2" style="grid-column:span 6">
+      <div class="sc-inner">
+        <span class="si">👥</span>
+        <h3>IT Outsourcing & Team Augmentation</h3>
+        <p>Senior European engineers ready to embed into your team. We solve the scaling problem — you focus on the product. SME to enterprise, any stack.</p>
+        <div class="stags"><span class="stag">Team Extension</span><span class="stag">Staff Augmentation</span><span class="stag">Technical Hiring</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="manifesto">
+  <div class="mq fade">
+    <div class="quote">"Technology should be <em>intuitive, easy, and pleasant</em> to use. That's not a slogan — it's the criteria every line of code we ship is measured against."</div>
+    <div class="author">The founding principle of <strong>People More</strong>, every day since we launched</div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="abg">
+    <div class="abt-l fade-l">
+      <p class="sl">Our Origin</p>
+      <h2>From Insignia's DNA<br>to a New Vision</h2>
+      <p>People More is a direct offshoot of <strong>Insignia</strong> — one of Poland's oldest and most respected interactive agencies. We inherited decades of hard-won knowledge in how digital products work in the real world. Then we built something new with it.</p>
+      <p>What makes us different: our founders wrote production code and shipped real products before they led companies. They understand technical trade-offs not from a slide deck, but from having made them under deadline pressure themselves.</p>
+      <p>The result is a company with a <strong>flat hierarchy</strong>, where developers talk directly to the board, where 100% remote work is a reality not a benefit, and where people are genuinely helped to grow — through conference speaking, publications, and projects that stretch their capabilities.</p>
+    </div>
+    <div class="abt-r">
+      <div class="acard fade fade-d1">
+        <div class="acard-ico">🏢</div>
+        <div><h4>Kraków Headquarters</h4><p>Based in one of Central Europe's fastest-growing tech ecosystems, with access to exceptional engineering graduates from top Polish universities.</p></div>
+      </div>
+      <div class="acard fade fade-d2">
+        <div class="acard-ico">🌍</div>
+        <div><h4>International Client Base</h4><p>We operate both directly with our own clients and as a technology partner for agencies and corporations across Europe and beyond.</p></div>
+      </div>
+      <div class="acard fade fade-d3">
+        <div class="acard-ico">⚖️</div>
+        <div><h4>Flat, Human Hierarchy</h4><p>No layers of management insulating decisions from reality. Every team member can speak directly to the founders — and they do.</p></div>
+      </div>
+      <div class="acard fade fade-d4">
+        <div class="acard-ico">📢</div>
+        <div><h4>We Build Your Brand Too</h4><p>We sponsor our engineers' conference talks and publications. A developer with a public profile is better at their craft — and proud to work here.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <p class="sl fade" style="color:var(--v2)">How We Work</p>
+  <h2 class="fade">Simple. Transparent. Effective.</h2>
+  <div class="pg">
+    <div class="pstep fade fade-d1">
+      <div class="pnum">01</div>
+      <h3>Discovery</h3>
+      <p>We listen first. Deep-dive into your goals, constraints, and existing systems before proposing anything.</p>
+    </div>
+    <div class="pstep fade fade-d2">
+      <div class="pnum">02</div>
+      <h3>Design & Architecture</h3>
+      <p>UX research, system design, and technical planning — a blueprint that survives contact with reality.</p>
+    </div>
+    <div class="pstep fade fade-d3">
+      <div class="pnum">03</div>
+      <h3>Build & Iterate</h3>
+      <p>Agile delivery with continuous feedback loops. No big-bang reveals — working software at every checkpoint.</p>
+    </div>
+    <div class="pstep fade fade-d4">
+      <div class="pnum">04</div>
+      <h3>Launch & Scale</h3>
+      <p>Production deployment, monitoring, and the ongoing partnership to scale what you've built together.</p>
+    </div>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="stack-inner">
+    <div class="si-l fade">
+      <p class="sl">Our Arsenal</p>
+      <h2>Technologies We<br>Actually Master</h2>
+      <p>We invest in depth, not breadth for breadth's sake. Every technology in our stack is one our engineers use daily and know at a production level — including knowing when not to use it.</p>
+      <div class="stack-pills">
+        <span class="sp sp-v">React</span>
+        <span class="sp sp-v">Angular</span>
+        <span class="sp sp-v">TypeScript</span>
+        <span class="sp sp-p">C# / .NET</span>
+        <span class="sp sp-p">Java</span>
+        <span class="sp sp-p">Python</span>
+        <span class="sp sp-p">Node.js</span>
+        <span class="sp sp-p">Erlang</span>
+        <span class="sp sp-o">AWS</span>
+        <span class="sp sp-o">Azure</span>
+        <span class="sp sp-o">GCP</span>
+        <span class="sp sp-o">MS SQL</span>
+        <span class="sp sp-o">PostgreSQL</span>
+        <span class="sp sp-o">Oracle</span>
+        <span class="sp sp-v">Figma</span>
+        <span class="sp sp-v">Pebble</span>
+        <span class="sp sp-p">REST / SOAP</span>
+        <span class="sp sp-p">Embedded FW</span>
+      </div>
+    </div>
+    <div class="si-r fade fade-d2">
+      <h3>Engagement Models</h3>
+      <div class="scard">
+        <span class="scard-ico">🚀</span>
+        <div><h4>Full Project Delivery</h4><p>We own the outcome — from UX to deployment.</p></div>
+      </div>
+      <div class="scard">
+        <span class="scard-ico">👥</span>
+        <div><h4>Team Augmentation</h4><p>Senior engineers embed into your workflow and tools.</p></div>
+      </div>
+      <div class="scard">
+        <span class="scard-ico">🔬</span>
+        <div><h4>Technical Consulting</h4><p>Architecture reviews, code audits, and strategic guidance.</p></div>
+      </div>
+      <div class="scard">
+        <span class="scard-ico">🏗️</span>
+        <div><h4>Partial Development</h4><p>We take a defined scope — you keep control of the rest.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="cta-bg"></div>
+  <div class="ctc fade">
+    <p style="font-size:.76rem;color:var(--v2);text-transform:uppercase;letter-spacing:.18em;margin-bottom:1rem">Start a conversation</p>
+    <h2>Ready to Build<br>Something <span>Extraordinary?</span></h2>
+    <p>Whether you have a detailed spec or a back-of-napkin idea, we're happy to talk. No commitment, no pressure. Just an honest conversation about what you're trying to build and whether we're the right team to build it with you.</p>
+    <a href="mailto:hello@peoplemore.pl" class="ce-block">
+      <span class="ce">hello@peoplemore.pl</span>
+      <span class="ce-sub">Kraków, Poland · We reply fast</span>
+    </a>
+    <div class="cta-btns">
+      <a href="mailto:hello@peoplemore.pl" class="btn-grad">Send a Message</a>
+      <a href="#services" class="btn-outline">Browse Services</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 People More P.S.A. · Kraków, Poland · An offshoot of Insignia</p>
+  <div class="fl">
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#stack">Tech</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const nav=document.getElementById('nav');
+  const hbg=document.getElementById('hbg');
+  const nl=document.getElementById('nl');
+  window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>50));
+  hbg.addEventListener('click',()=>nl.classList.toggle('open'));
+  nl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nl.classList.remove('open')));
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}});
+  },{threshold:.1});
+  document.querySelectorAll('.fade,.fade-l').forEach(el=>obs.observe(el));
+})();
+</script>
+</body>
+</html>

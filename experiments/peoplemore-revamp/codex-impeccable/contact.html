@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Contact People More | Book a Project Meeting</title>
+  <meta name="description" content="Book a meeting with People More to discuss software development, modernization, and team extension options.">
+  <meta name="keywords" content="contact software partner, book IT meeting, People More contact, software house Krakow">
+  <link rel="stylesheet" href="styles.css">
+  <script src="scripts.js" defer></script>
+</head>
+<body data-page="contact">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="logo-panel" href="index.html" aria-label="People More home page">
+        <img class="logo" src="assets/logo.svg" alt="People More logo">
+      </a>
+      <button class="menu-button" type="button" data-menu-button aria-expanded="false" aria-controls="main-nav">Menu</button>
+      <ul id="main-nav" class="nav-links" data-nav-links>
+        <li><a href="index.html" data-page-link="home">Home</a></li>
+        <li><a href="about-us.html" data-page-link="about">About Us</a></li>
+        <li><a href="services.html" data-page-link="services">Services</a></li>
+        <li><a href="engagement-models.html" data-page-link="models">Engagement Models</a></li>
+        <li><a href="case-study.html" data-page-link="case-study">Case Study</a></li>
+        <li><a href="contact.html" data-page-link="contact">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main-content" class="page">
+    <section class="page-title" aria-labelledby="contact-title">
+      <p class="kicker">Contact</p>
+      <h1 id="contact-title">Book a meeting to plan your next delivery move.</h1>
+      <p>
+        Tell us what you are building, modernizing, or scaling.
+        We usually respond within one business day with next-step options and a suggested meeting slot.
+      </p>
+    </section>
+
+    <section class="section" aria-labelledby="meeting-title" id="meeting-form">
+      <h2 id="meeting-title">Meeting request form</h2>
+      <form class="form-grid" data-contact-form novalidate>
+        <div class="field">
+          <label for="name">Full name</label>
+          <input id="name" name="name" autocomplete="name" required>
+          <p class="error-text" data-error-for="name" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="email">Work email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required>
+          <p class="error-text" data-error-for="email" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="company">Company</label>
+          <input id="company" name="company" autocomplete="organization" required>
+          <p class="error-text" data-error-for="company" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="model">Preferred engagement model</label>
+          <select id="model" name="model" required>
+            <option value="">Select one option</option>
+            <option value="tm">Time and Material</option>
+            <option value="fixed">Fixed Price</option>
+            <option value="team">Dedicated Team Extension</option>
+            <option value="unsure">Not sure yet</option>
+          </select>
+          <p class="error-text" data-error-for="model" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="message">Project scope</label>
+          <textarea id="message" name="message" required aria-describedby="message-help"></textarea>
+          <small id="message-help">Include goals, timeline expectations, and key constraints.</small>
+          <p class="error-text" data-error-for="message" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label>
+            <input type="checkbox" name="consent" value="yes" required>
+            I agree to People More processing my personal data to answer this inquiry.
+          </label>
+          <p class="error-text" data-error-for="consent" aria-live="polite"></p>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-primary" type="submit">Send inquiry</button>
+          <a class="btn btn-secondary" href="mailto:office@peoplemore.pl">Email directly</a>
+        </div>
+        <p class="form-status" data-form-status aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="section" aria-labelledby="direct-title">
+      <h2 id="direct-title">Direct contact options</h2>
+      <div class="grid-2">
+        <article class="module">
+          <h3>General office</h3>
+          <p><a href="tel:+48516607737">+48 516 607 737</a></p>
+          <p><a href="mailto:office@peoplemore.pl">office@peoplemore.pl</a></p>
+          <p>Response SLA: one business day for first contact.</p>
+        </article>
+        <article class="module">
+          <h3>Leadership contacts</h3>
+          <ul>
+            <li>Marcin Dabrowski (CEO): <a href="mailto:m.dabrowski@peoplemore.pl">m.dabrowski@peoplemore.pl</a></li>
+            <li>Piotr Kaczor (COO): <a href="mailto:p.kaczor@peoplemore.pl">p.kaczor@peoplemore.pl</a></li>
+            <li>Mateusz Cieslak (CCO): <a href="mailto:m.cieslak@peoplemore.pl">m.cieslak@peoplemore.pl</a></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="office-title">
+      <h2 id="office-title">Office location</h2>
+      <div class="grid-2">
+        <article class="module">
+          <h3>Registered office</h3>
+          <p>People More P.S.A.<br>ul. Orlat Lwowskich 8<br>31-518 Krakow, Poland</p>
+          <p>NIP: 6762574085 | REGON: 384887913 | KRS: 0000995717</p>
+          <a class="btn btn-secondary" href="https://maps.google.com/?q=Orlat+Lwowskich+8,+Krakow">Open map</a>
+        </article>
+        <article class="module">
+          <h3>Privacy note</h3>
+          <p>Inquiry data is used only for handling your request and follow-up communication related to your project discussion.</p>
+          <p class="note">For full data handling terms, refer to the official privacy policy on peoplemore.pl.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="cta-band" aria-labelledby="contact-cta-title">
+      <h2 id="contact-cta-title">Prefer a direct start?</h2>
+      <p>Send your project summary to office@peoplemore.pl and include timeline, team size, and your target launch window.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="mailto:office@peoplemore.pl">Email now</a>
+        <a class="btn btn-secondary" href="engagement-models.html">Review models first</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <section>
+        <h2>People More P.S.A.</h2>
+        <p>ul. Orlat Lwowskich 8, 31-518 Krakow, Poland</p>
+        <p>NIP: 6762574085 | REGON: 384887913 | KRS: 0000995717</p>
+        <p><a href="tel:+48516607737">+48 516 607 737</a> | <a href="mailto:office@peoplemore.pl">office@peoplemore.pl</a></p>
+      </section>
+      <section>
+        <h3>Navigate</h3>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="about-us.html">About Us</a>
+          <a href="services.html">Services</a>
+          <a href="engagement-models.html">Engagement Models</a>
+          <a href="case-study.html">Case Study</a>
+        </div>
+        <p class="footer-bottom">(c)<span data-year></span> People More P.S.A. All rights reserved.</p>
+      </section>
+    </div>
+  </footer>
+</body>
+</html>

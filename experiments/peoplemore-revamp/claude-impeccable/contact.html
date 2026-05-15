@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Talk to People More about your project. Book a meeting, call us directly, or send a message. We respond within 48 hours.">
+  <title>Contact | People More Software Development</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header>
+    <nav class="site-nav" aria-label="Main navigation">
+      <div class="container nav-inner">
+        <a class="nav-logo" href="index.html" aria-label="People More — home">
+          <img src="https://peoplemore.pl/logo.svg" alt="People More" width="140" height="32">
+        </a>
+        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="nav-links" role="list">
+          <li><a href="about-us.html">About us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="engagement-models.html">Engagement Models</a></li>
+          <li><a href="case-study.html">Case Studies</a></li>
+          <li><a href="contact.html" class="nav-cta" aria-current="page">Book a meeting</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- PAGE HERO -->
+    <section class="page-hero page-hero-narrow" aria-labelledby="page-heading">
+      <div class="container">
+        <span class="section-label">Get in touch</span>
+        <h1 id="page-heading">Let's talk about your project.</h1>
+        <p class="page-hero-body">Tell us what you are working on. We will propose an engagement model and team composition within 48 hours. No pitch decks. No automated responses. You speak to a person from the first message.</p>
+      </div>
+    </section>
+
+    <!-- CONTACT GRID -->
+    <section class="section" aria-labelledby="contact-options-heading">
+      <div class="container">
+        <h2 class="visually-hidden" id="contact-options-heading">Contact options</h2>
+        <div class="contact-grid">
+
+          <!-- LEFT: DIRECT CONTACTS + OFFICE -->
+          <div class="contact-left">
+            <div class="direct-contacts">
+              <h3 class="direct-contacts-heading">Talk to someone directly</h3>
+              <p class="direct-contacts-sub">Reach Marcin, Piotr, or Mateusz — the people who run People More and will be involved in your engagement from day one.</p>
+
+              <div class="direct-cards">
+
+                <div class="direct-card">
+                  <img
+                    class="direct-card-photo"
+                    src="https://peoplemore.pl/static/8ae5b71d5fdbde937bd0021800e5a5b0/52c81/Marcin.png"
+                    alt="Marcin Dąbrowski, CEO, People More"
+                    width="64"
+                    height="64"
+                    loading="lazy"
+                  >
+                  <div class="direct-card-info">
+                    <p class="direct-card-name">Marcin Dąbrowski</p>
+                    <p class="direct-card-role">CEO</p>
+                    <a class="direct-card-tel" href="tel:+48506709385">+48 506 709 385</a>
+                  </div>
+                </div>
+
+                <div class="direct-card">
+                  <img
+                    class="direct-card-photo"
+                    src="https://peoplemore.pl/static/7978de8215bf95b3b93f14caec975bcc/d3d06/PiotrKaczor-e1742826873105.webp"
+                    alt="Piotr Kaczor, COO, People More"
+                    width="64"
+                    height="64"
+                    loading="lazy"
+                  >
+                  <div class="direct-card-info">
+                    <p class="direct-card-name">Piotr Kaczor</p>
+                    <p class="direct-card-role">COO</p>
+                    <a class="direct-card-tel" href="tel:+48516607737">+48 516 607 737</a>
+                  </div>
+                </div>
+
+                <div class="direct-card">
+                  <img
+                    class="direct-card-photo"
+                    src="https://peoplemore.pl/static/4641009ca8a8823d4b2bbfe7bf93ccce/52c81/Mateusz.png"
+                    alt="Mateusz Cieślak, CCO, People More"
+                    width="64"
+                    height="64"
+                    loading="lazy"
+                  >
+                  <div class="direct-card-info">
+                    <p class="direct-card-name">Mateusz Cieślak</p>
+                    <p class="direct-card-role">CCO</p>
+                    <a class="direct-card-tel" href="tel:+48574283183">+48 574 283 183</a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="office-block">
+              <h3 class="office-heading">Office</h3>
+              <address class="office-address">
+                People More P.S.A.<br>
+                ul. Orląt Lwowskich 8<br>
+                31-518 Kraków<br>
+                Poland
+              </address>
+              <p class="office-email"><a href="mailto:office@peoplemore.pl">office@peoplemore.pl</a></p>
+            </div>
+          </div>
+
+          <!-- RIGHT: FORM -->
+          <div class="contact-right">
+            <div class="contact-form-wrap">
+              <h3 class="form-heading">Send us a message</h3>
+
+              <form
+                class="contact-form"
+                method="post"
+                action="#"
+                novalidate
+                aria-label="Contact form"
+              >
+                <div class="form-row form-row-2">
+                  <div class="form-group">
+                    <label class="form-label" for="name">Full name <span aria-hidden="true">*</span></label>
+                    <input
+                      class="form-input"
+                      type="text"
+                      id="name"
+                      name="name"
+                      autocomplete="name"
+                      required
+                      aria-required="true"
+                    >
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="company">Company <span aria-hidden="true">*</span></label>
+                    <input
+                      class="form-input"
+                      type="text"
+                      id="company"
+                      name="company"
+                      autocomplete="organization"
+                      required
+                      aria-required="true"
+                    >
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="role">Your role</label>
+                  <input
+                    class="form-input"
+                    type="text"
+                    id="role"
+                    name="role"
+                    autocomplete="organization-title"
+                  >
+                </div>
+
+                <div class="form-row form-row-2">
+                  <div class="form-group">
+                    <label class="form-label" for="email">Work email <span aria-hidden="true">*</span></label>
+                    <input
+                      class="form-input"
+                      type="email"
+                      id="email"
+                      name="email"
+                      autocomplete="email"
+                      required
+                      aria-required="true"
+                    >
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="phone">Phone <span class="form-label-hint">(optional)</span></label>
+                    <input
+                      class="form-input"
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      autocomplete="tel"
+                    >
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="brief">Tell us about your project <span aria-hidden="true">*</span></label>
+                  <textarea
+                    class="form-input form-textarea"
+                    id="brief"
+                    name="brief"
+                    rows="6"
+                    required
+                    aria-required="true"
+                    placeholder="What are you working on? What kind of help do you need? Any timeline or budget constraints worth knowing about?"
+                  ></textarea>
+                </div>
+
+                <fieldset class="form-fieldset">
+                  <legend class="form-label">Preferred contact method</legend>
+                  <div class="form-radios">
+                    <label class="form-radio-label">
+                      <input class="form-radio" type="radio" name="preferred_contact" value="email" checked>
+                      <span>Email</span>
+                    </label>
+                    <label class="form-radio-label">
+                      <input class="form-radio" type="radio" name="preferred_contact" value="phone">
+                      <span>Phone call</span>
+                    </label>
+                    <label class="form-radio-label">
+                      <input class="form-radio" type="radio" name="preferred_contact" value="video">
+                      <span>Video call</span>
+                    </label>
+                  </div>
+                </fieldset>
+
+                <div class="form-group form-group-check">
+                  <label class="form-check-label">
+                    <input
+                      class="form-check"
+                      type="checkbox"
+                      name="gdpr_consent"
+                      id="gdpr_consent"
+                      required
+                      aria-required="true"
+                    >
+                    <span>I agree to People More processing my personal data to respond to this enquiry, in accordance with the <a href="https://peoplemore.pl/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a>. <span aria-hidden="true">*</span></span>
+                  </label>
+                </div>
+
+                <p class="form-gdpr-note">Your data is processed solely to respond to your enquiry and will not be shared with third parties or used for marketing without your separate consent. You have the right to access, correct, or request deletion of your data at any time by contacting <a href="mailto:office@peoplemore.pl">office@peoplemore.pl</a>.</p>
+
+                <button class="btn btn-primary form-submit" type="submit">Send message</button>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" aria-label="Site footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img class="footer-logo" src="https://peoplemore.pl/logo.svg" alt="People More" width="130" height="30">
+          <p class="footer-tagline">European IT development, engineered for your business. Kraków-based, working worldwide since 2019.</p>
+        </div>
+        <nav aria-label="Company links">
+          <p class="footer-col-label">Company</p>
+          <ul class="footer-col-links" role="list">
+            <li><a href="about-us.html">About us</a></li>
+            <li><a href="case-study.html">Case studies</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="https://peoplemore.pl/career/">Career</a></li>
+            <li><a href="https://peoplemore.pl/blog/">Blog</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Services links">
+          <p class="footer-col-label">Services</p>
+          <ul class="footer-col-links" role="list">
+            <li><a href="services.html#it-projects">IT Projects</a></li>
+            <li><a href="services.html#team-extension">Team Extension</a></li>
+            <li><a href="services.html#managed-applications">Managed Apps</a></li>
+            <li><a href="services.html#transformation">Transformation</a></li>
+            <li><a href="services.html#ai-automation">AI &amp; Automation</a></li>
+            <li><a href="engagement-models.html">Engagement Models</a></li>
+          </ul>
+        </nav>
+        <div>
+          <p class="footer-col-label">Contact</p>
+          <address style="font-style:normal;font-size:var(--text-sm);color:oklch(55% 0.008 70);line-height:2;">
+            ul. Orląt Lwowskich 8<br>
+            31-518 Kraków, Poland<br>
+            <a href="tel:+48516607737" style="color:inherit">+48 516 607 737</a><br>
+            <a href="mailto:office@peoplemore.pl" style="color:inherit">office@peoplemore.pl</a>
+          </address>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 People More P.S.A. All rights reserved.</p>
+        <p>
+          <a href="https://peoplemore.pl/privacy-policy/">Privacy Policy</a>
+          &nbsp;&middot;&nbsp;
+          <a href="https://peoplemore.pl/reporting_procedure.pdf">Reporting Procedure</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.querySelector('.nav-toggle');
+    const links = document.querySelector('.nav-links');
+    if (toggle && links) {
+      toggle.addEventListener('click', () => {
+        const isOpen = links.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', isOpen);
+      });
+    }
+  </script>
+
+</body>
+</html>

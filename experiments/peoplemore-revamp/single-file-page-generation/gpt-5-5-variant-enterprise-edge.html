@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>People More | Engineering capacity for ambitious roadmaps</title>
+  <meta name="description" content="Enterprise-ready software delivery, technical integrations, and team augmentation from People More, a Krakow-based IT development partner.">
+  <style>
+    :root {
+      --night: #05070b;
+      --panel: #101721;
+      --panel-2: #152435;
+      --text: #edf7ff;
+      --muted: #9eb2c1;
+      --cyan: #52f2d0;
+      --amber: #ffb84d;
+      --rose: #ff5f7e;
+      --line: rgba(237,247,255,.13);
+      --shadow: 0 30px 90px rgba(0,0,0,.45);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: "Lucida Sans", "Trebuchet MS", sans-serif;
+      background:
+        radial-gradient(circle at 75% 10%, rgba(82,242,208,.2), transparent 24rem),
+        radial-gradient(circle at 20% 32%, rgba(255,95,126,.16), transparent 26rem),
+        linear-gradient(120deg, #05070b 0%, #09111d 48%, #05070b 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(237,247,255,.05) 1px, transparent 1px),
+        linear-gradient(rgba(237,247,255,.05) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(circle at center, black, transparent 78%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .shell { position: relative; z-index: 1; }
+    .wrap { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+
+    header { padding: 20px 0; position: sticky; top: 0; z-index: 10; background: rgba(5,7,11,.68); backdrop-filter: blur(20px); border-bottom: 1px solid var(--line); }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .logo-box { display: inline-grid; place-items: center; padding: 10px 13px; border-radius: 14px; background: linear-gradient(135deg, rgba(82,242,208,.16), rgba(255,255,255,.06)); border: 1px solid rgba(255,255,255,.16); }
+    .logo-box svg { width: 143px; height: auto; display: block; }
+    .nav nav { display: flex; gap: 22px; color: var(--muted); font-size: 14px; }
+    .nav nav a:hover { color: var(--text); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 12px;
+      font-weight: 900;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); border-color: rgba(82,242,208,.72); background: rgba(82,242,208,.12); }
+    .btn.primary { color: #04100d; background: var(--cyan); border-color: transparent; box-shadow: 0 0 36px rgba(82,242,208,.26); }
+
+    .hero { padding: 92px 0 72px; }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 34px; align-items: center; }
+    .kicker { display: inline-flex; gap: 10px; align-items: center; color: var(--cyan); font: 800 13px "Courier New", monospace; letter-spacing: .12em; text-transform: uppercase; }
+    .kicker::before { content: "//"; color: var(--amber); }
+    h1, h2, h3 { margin: 0; line-height: .96; letter-spacing: -.05em; font-family: "Gill Sans", "Trebuchet MS", sans-serif; }
+    h1 { margin-top: 22px; font-size: clamp(52px, 8.6vw, 112px); max-width: 900px; }
+    h2 { font-size: clamp(40px, 6vw, 76px); }
+    h3 { font-size: 26px; letter-spacing: -.025em; }
+    p { line-height: 1.65; color: var(--muted); }
+    .lead { max-width: 690px; margin: 24px 0 0; font-size: clamp(18px, 2vw, 22px); }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+
+    .command-center {
+      position: relative;
+      padding: 22px;
+      border-radius: 30px;
+      border: 1px solid var(--line);
+      background: linear-gradient(145deg, rgba(16,23,33,.96), rgba(8,12,18,.98));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      animation: rise .8s ease both;
+    }
+    .command-center::before { content: ""; position: absolute; inset: -1px; background: linear-gradient(135deg, rgba(82,242,208,.28), transparent 34%, rgba(255,184,77,.18)); opacity: .7; pointer-events: none; }
+    .window { position: relative; border-radius: 22px; border: 1px solid var(--line); background: rgba(5,7,11,.72); overflow: hidden; }
+    .window-bar { display: flex; gap: 8px; padding: 14px; border-bottom: 1px solid var(--line); }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--rose); }
+    .dot:nth-child(2) { background: var(--amber); }
+    .dot:nth-child(3) { background: var(--cyan); }
+    .terminal { padding: 24px; font-family: "Courier New", monospace; }
+    .terminal p { margin: 0 0 14px; color: #c7d6e0; font-size: 14px; }
+    .terminal strong { color: var(--cyan); font-weight: 700; }
+    .metric-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 20px; }
+    .metric { padding: 18px; border-radius: 18px; background: rgba(255,255,255,.06); border: 1px solid var(--line); }
+    .metric b { display: block; font-size: 32px; color: var(--text); letter-spacing: -.04em; }
+    .metric span { color: var(--muted); font-size: 13px; }
+
+    section { padding: 74px 0; }
+    .split-title { display: grid; grid-template-columns: .9fr 1.1fr; gap: 28px; align-items: end; margin-bottom: 30px; }
+    .split-title p { margin: 0; }
+
+    .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .card { padding: 24px; min-height: 260px; border: 1px solid var(--line); border-radius: 24px; background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03)); transition: transform .22s ease, background .22s ease; }
+    .card:hover { transform: translateY(-6px); background: rgba(82,242,208,.09); }
+    .card .icon { width: 48px; height: 48px; border-radius: 15px; display: grid; place-items: center; background: rgba(82,242,208,.12); color: var(--cyan); font-family: "Courier New", monospace; font-weight: 900; margin-bottom: 40px; }
+
+    .pipeline { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; border: 1px solid var(--line); border-radius: 28px; overflow: hidden; background: rgba(255,255,255,.04); }
+    .step { min-height: 230px; padding: 24px; border-right: 1px solid var(--line); }
+    .step:last-child { border-right: 0; }
+    .step span { color: var(--amber); font: 800 13px "Courier New", monospace; }
+    .step h3 { margin-top: 24px; }
+
+    .stack { padding: 28px; border-radius: 30px; background: #edf7ff; color: #09111d; display: grid; grid-template-columns: .85fr 1.15fr; gap: 26px; align-items: center; }
+    .stack p { color: rgba(9,17,29,.68); }
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+    .chips span { padding: 11px 13px; border-radius: 999px; background: #dbe8ef; color: #09111d; font-weight: 800; font-size: 14px; }
+
+    .cta { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; padding: 34px; border-radius: 30px; background: linear-gradient(135deg, rgba(82,242,208,.18), rgba(255,184,77,.13)); border: 1px solid rgba(82,242,208,.3); }
+    .cta p { margin: 14px 0 0; max-width: 660px; }
+    footer { padding: 34px 0 48px; color: var(--muted); }
+    footer .wrap { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; font-size: 14px; }
+
+    @keyframes rise { from { opacity: 0; transform: translateY(24px) scale(.98); } to { opacity: 1; transform: none; } }
+
+    @media (max-width: 980px) {
+      .nav nav { display: none; }
+      .hero-grid, .split-title, .stack, .cta { grid-template-columns: 1fr; }
+      .cards { grid-template-columns: repeat(2, 1fr); }
+      .pipeline { grid-template-columns: 1fr; }
+      .step { border-right: 0; border-bottom: 1px solid var(--line); min-height: auto; }
+      .step:last-child { border-bottom: 0; }
+    }
+
+    @media (max-width: 580px) {
+      .wrap { width: min(100% - 24px, 1180px); }
+      .cards, .metric-grid { grid-template-columns: 1fr; }
+      .btn, .actions, .cta .btn { width: 100%; }
+      .command-center, .stack, .cta { padding: 18px; border-radius: 22px; }
+      section { padding: 54px 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div class="wrap nav">
+        <a class="logo-box" href="#top" aria-label="People More home">
+          <svg role="img" aria-labelledby="peoplemore-logo-2" xmlns="http://www.w3.org/2000/svg" width="142.644" height="33" viewBox="0 0 142.644 32.658"><title id="peoplemore-logo-2">People More</title><g transform="translate(-102.084 -810.724)"><path d="M-1-1H141.644V31.658H-1ZM139.644,1H1V29.658H139.644Z" transform="translate(103.084 811.724)" fill="#fff"></path><g transform="translate(111.429 819.442)"><path d="M113.152,827.6v5.279h-2.84V818.653h5.177a5.344,5.344,0,0,1,3.8,1.209,4.3,4.3,0,0,1,1.279,3.285,4.183,4.183,0,0,1-1.32,3.243,5.365,5.365,0,0,1-3.757,1.208Zm4.533-4.451a2.169,2.169,0,0,0-.584-1.633,2.7,2.7,0,0,0-1.914-.563h-2.034v4.371h2.034Q117.685,825.321,117.685,823.146Z" transform="translate(-110.312 -818.371)" fill="#fff"></path><path d="M123.2,820.909V824.6h5.036v2.176H123.2V830.6h5.641v2.277h-8.481V818.653h8.481v2.256Z" transform="translate(-108.759 -818.371)" fill="#fff"></path><path d="M139.429,819.406a6.728,6.728,0,0,1,2.558,2.587,8.028,8.028,0,0,1,0,7.525,6.7,6.7,0,0,1-2.558,2.6,7.515,7.515,0,0,1-7.232,0,6.7,6.7,0,0,1-2.558-2.6,8.028,8.028,0,0,1,0-7.525,6.72,6.72,0,0,1,2.558-2.587,7.516,7.516,0,0,1,7.232,0Zm-5.812,2.256a3.855,3.855,0,0,0-1.48,1.622,5.964,5.964,0,0,0,0,4.935,3.852,3.852,0,0,0,1.48,1.621,4.552,4.552,0,0,0,4.392,0,3.852,3.852,0,0,0,1.48-1.621,5.963,5.963,0,0,0,0-4.935,3.855,3.855,0,0,0-1.48-1.622,4.553,4.553,0,0,0-4.392,0Z" transform="translate(-107.471 -818.398)" fill="#fff"></path><path d="M145.275,827.6v5.279h-2.84V818.653h5.177a5.344,5.344,0,0,1,3.8,1.209,4.3,4.3,0,0,1,1.279,3.285,4.183,4.183,0,0,1-1.32,3.243,5.366,5.366,0,0,1-3.757,1.208Zm4.532-4.451a2.169,2.169,0,0,0-.584-1.633,2.7,2.7,0,0,0-1.914-.563h-2.034v4.371h2.034Q149.808,825.321,149.808,823.146Z" transform="translate(-105.349 -818.371)" fill="#fff"></path><path d="M155.325,830.7H160.1v2.176h-7.615V818.653h2.84Z" transform="translate(-103.797 -818.371)" fill="#fff"></path><path d="M162.95,820.909V824.6h5.036v2.176H162.95V830.6h5.641v2.277H160.11V818.653h8.481v2.256Z" transform="translate(-102.619 -818.371)" fill="#fff"></path><path d="M185.732,818.619v14.263h-4.451V825.77l-2.2,7.112h-3.828l-2.2-7.112v7.112H168.59V818.619h5.479l3.143,8.561,3.062-8.561Z" transform="translate(-101.309 -818.377)" fill="#fff"></path><path d="M195.437,819.347a6.962,6.962,0,0,1,2.648,2.608,7.745,7.745,0,0,1,0,7.534,7,7,0,0,1-2.659,2.618,7.642,7.642,0,0,1-7.373,0,7.075,7.075,0,0,1-2.669-2.618,7.682,7.682,0,0,1,0-7.534,7.015,7.015,0,0,1,2.669-2.608,7.736,7.736,0,0,1,7.383,0Zm-5.761,4.049a3.486,3.486,0,0,0-.726,2.326,3.45,3.45,0,0,0,.726,2.307,2.918,2.918,0,0,0,4.128,0,3.45,3.45,0,0,0,.726-2.307,3.486,3.486,0,0,0-.726-2.326,2.915,2.915,0,0,0-4.128,0Z" transform="translate(-98.867 -818.409)" fill="#fff"></path><path d="M205.232,832.882l-2.7-5.118v5.118h-4.471V818.619h6.646a6.553,6.553,0,0,1,2.961.614,4.261,4.261,0,0,1,1.844,1.673,4.656,4.656,0,0,1,.614,2.386,4.24,4.24,0,0,1-.8,2.538,4.375,4.375,0,0,1-2.286,1.592l3.1,5.46Zm-2.7-8.1h1.773a1.4,1.4,0,0,0,.966-.292,1.4,1.4,0,0,0-.01-1.8,1.314,1.314,0,0,0-.956-.323h-1.773Z" transform="translate(-96.756 -818.377)" fill="#fff"></path><path d="M213.786,822.163v1.775h4.432V827.3h-4.432v2.015h5.037v3.566h-9.508V818.619h9.508v3.544Z" transform="translate(-95.017 -818.377)" fill="#fff"></path></g></g></svg>
+        </a>
+        <nav aria-label="Primary navigation">
+          <a href="#capabilities">Capabilities</a>
+          <a href="#delivery">Delivery</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="wrap hero-grid">
+          <div>
+            <span class="kicker">software delivery partner</span>
+            <h1>When your roadmap needs more senior hands.</h1>
+            <p class="lead">People More brings product-minded engineers, UX/UI specialists, and integration experts into complex delivery environments without losing the human clarity that keeps work moving.</p>
+            <div class="actions">
+              <a class="btn primary" href="#contact">Add capacity</a>
+              <a class="btn" href="#capabilities">See capabilities</a>
+            </div>
+          </div>
+
+          <aside class="command-center" aria-label="Delivery dashboard">
+            <div class="window">
+              <div class="window-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+              <div class="terminal">
+                <p><strong>peoplemore.init()</strong> -> align on users, architecture, and risk</p>
+                <p><strong>team.extend()</strong> -> React, Angular, .NET, Java, Python, Node.js</p>
+                <p><strong>systems.connect()</strong> -> APIs, databases, cloud, embedded devices</p>
+                <div class="metric-grid">
+                  <div class="metric"><b>SME</b><span>practical delivery for growing firms</span></div>
+                  <div class="metric"><b>Global</b><span>support for international partners</span></div>
+                  <div class="metric"><b>Remote</b><span>distributed teams, Krakow roots</span></div>
+                  <div class="metric"><b>Human</b><span>software designed for adoption</span></div>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="capabilities">
+        <div class="wrap">
+          <div class="split-title">
+            <h2>Capabilities for serious builds.</h2>
+            <p>Use People More as a focused delivery team, a specialist integration partner, or a flexible source of senior European development talent.</p>
+          </div>
+          <div class="cards">
+            <article class="card"><div class="icon">UX</div><h3>Product and interface design</h3><p>Turn complex processes into clear journeys, screens, and decision paths.</p></article>
+            <article class="card"><div class="icon">FE</div><h3>Frontend engineering</h3><p>Modern, maintainable interfaces with React, Angular, and TypeScript.</p></article>
+            <article class="card"><div class="icon">BE</div><h3>Backend architecture</h3><p>Robust services in .NET, Java, Python, Node.js, Erlang, and relational databases.</p></article>
+            <article class="card"><div class="icon">IO</div><h3>Deep integrations</h3><p>REST/SOAP APIs, cloud environments, low-code modules, and embedded firmware.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="delivery">
+        <div class="wrap">
+          <div class="split-title">
+            <h2>Low drama. High signal.</h2>
+            <p>The founders come from development and design, so technical tradeoffs, user needs, and delivery constraints stay in the same conversation.</p>
+          </div>
+          <div class="pipeline">
+            <div class="step"><span>01 DISCOVER</span><h3>Map the business process</h3><p>Understand users, systems, constraints, and where value is blocked.</p></div>
+            <div class="step"><span>02 DESIGN</span><h3>Shape usable flows</h3><p>Prototype the experience before engineering effort hardens around guesswork.</p></div>
+            <div class="step"><span>03 BUILD</span><h3>Ship with senior specialists</h3><p>Bring the right mix of frontend, backend, mobile, and QA thinking.</p></div>
+            <div class="step"><span>04 CONNECT</span><h3>Integrate the ecosystem</h3><p>Make APIs, databases, cloud, and devices work together cleanly.</p></div>
+            <div class="step"><span>05 SCALE</span><h3>Extend the team</h3><p>Add capacity as the roadmap grows, without losing product context.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="wrap stack">
+          <div>
+            <span class="kicker">technology range</span>
+            <h2>Useful breadth, not buzzword bingo.</h2>
+            <p>People More works across product stacks, enterprise databases, cloud environments, and specialized embedded contexts.</p>
+          </div>
+          <div class="chips">
+            <span>React</span><span>Angular</span><span>TypeScript</span><span>C#/.NET</span><span>Java</span><span>Python</span><span>Node.js</span><span>Erlang</span><span>MS SQL</span><span>Oracle</span><span>PostgreSQL</span><span>AWS</span><span>Azure</span><span>GCP</span><span>Firmware</span><span>REST/SOAP</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="wrap cta">
+          <div>
+            <h2>Give your roadmap a stronger engine.</h2>
+            <p>Start with a practical scoping conversation: what needs to ship, which roles are missing, and which technical risks deserve attention first.</p>
+          </div>
+          <a class="btn primary" href="mailto:office@peoplemore.pl?subject=Engineering%20capacity%20conversation">Talk to People More</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <span>People More P.S.A. | Krakow, Poland</span>
+        <span>End-to-end software | Outsourcing | Integrations</span>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
