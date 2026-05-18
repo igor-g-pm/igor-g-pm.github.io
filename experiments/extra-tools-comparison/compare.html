@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Extra Tools Comparison</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #13131a;
+      color: #cdd6f4;
+      padding: 40px 32px;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: 600;
+      color: #89b4fa;
+      margin-bottom: 32px;
+      letter-spacing: 0.02em;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 640px;
+      table-layout: fixed;
+    }
+
+    thead th {
+      background: #1e1e2e;
+      color: #89b4fa;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 12px 20px;
+      border: 1px solid #313244;
+      text-align: center;
+      width: 20%;
+    }
+
+    tbody td {
+      border: 1px solid #313244;
+      padding: 14px 20px;
+      vertical-align: middle;
+      text-align: center;
+      background: #1e1e2e;
+    }
+
+    tbody tr:nth-child(even) td {
+      background: #181825;
+    }
+
+    /* Row label cell */
+    td.row-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #6c7086;
+      text-align: left;
+    }
+
+    /* Thumbnail images */
+    .thumb {
+      max-width: 160px;
+      max-height: 110px;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 6px;
+      border: 1px solid #313244;
+      cursor: zoom-in;
+      display: block;
+      margin: 0 auto;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .thumb:hover {
+      border-color: #89b4fa;
+      box-shadow: 0 0 0 2px #89b4fa44;
+    }
+
+    /* Source row link styling */
+    td.source-cell a {
+      color: #89b4fa;
+      font-size: 13px;
+      text-decoration: none;
+      word-break: break-all;
+    }
+
+    td.source-cell a:hover {
+      text-decoration: underline;
+    }
+
+    /* Lightbox overlay */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.82);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+
+    #lightbox.open {
+      display: flex;
+    }
+
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 8px 48px rgba(0,0,0,0.7);
+      pointer-events: none;
+    }
+
+    #lightbox-close {
+      position: fixed;
+      top: 20px;
+      right: 28px;
+      font-size: 28px;
+      color: #cdd6f4;
+      cursor: pointer;
+      line-height: 1;
+      background: none;
+      border: none;
+      opacity: 0.7;
+    }
+
+    #lightbox-close:hover { opacity: 1; }
+  </style>
+</head>
+<body>
+
+  <h1>Extra Features & Tools Comparison</h1>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Claude</th>
+          <th>Codex</th>
+          <th>Copilot</th>
+          <th>Google</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="row-label"></td>
+          <td>
+            <img class="thumb" src="claude_tools.png" alt="Claude tools screenshot">
+          </td>
+          <td>
+            <img class="thumb" src="codex_tools.png" alt="Codex tools screenshot">
+          </td>
+          <td>
+            <img class="thumb" src="copilot_365.png" alt="Copilot tools screenshot">
+          </td>
+          <td>
+            <img class="thumb" src="google_labs.png" alt="Google Labs tools screenshot">
+          </td>
+        </tr>
+        <tr>
+          <td class="row-label">Source</td>
+          <td class="source-cell"><a href="https://claude.ai/downloads">link</a></td>
+          <td class="source-cell"><a href="https://developers.openai.com/codex/app">link</a></td>
+          <td class="source-cell"><a href="https://www.microsoft.com/pl-pl/microsoft-365-copilot">link</a></td>
+          <td class="source-cell"><a href="https://labs.google/experiments">link</a></td>
+        </tr>
+        <tr>
+          <td class="row-label">Desktop App / IDE</td>
+          <td class="source-cell">🙋<br/><a href="https://support.claude.com/en/articles/10065433-install-claude-desktop">Only macOS & Win (No Linux)</a></td>
+          <td class="source-cell">🙋<br/><a href="https://developers.openai.com/codex/app#getting-started" >Only macOS & Win (No Linux)</a></td>
+          <td class="source-cell">✅<br/>(VS Code)</td>
+          <td class="source-cell">✅<br/>(Antigravity)</td>
+        </tr>
+        <tr>
+          <td class="row-label">Available as extension?</td>
+          <td class="source-cell">✅<br/>(Claude Code for VS Code, Jetbrains)</td>
+          <td class="source-cell">✅<br/>(Codex for VS Code, Jetbrains)</td>
+          <td class="source-cell">✅<br/>(Copilot for VS Code, Jetbrains)</td>
+          <td class="source-cell">❌</td>
+        </tr>
+        <tr>
+          <td class="row-label">CLI</td>
+          <td class="source-cell">✅</td>
+          <td class="source-cell">✅</td>
+          <td class="source-cell">✅</td>
+          <td class="source-cell">❌</td>
+        </tr>
+        <tr>
+          <td class="row-label">Mobile App</td>
+          <td class="source-cell">✅</td>
+          <td class="source-cell">✅<br/><a href="https://chatgpt.com/codex/mobile/">Added lately</a></td>
+          <td class="source-cell">🙋<br/><a href="https://github.com/coder/code-server">Workaround (VS Code through browser)</a></td>
+          <td class="source-cell">❌<br/>Są workaroundy ale "bardzo nieoficjalne"</td>
+        </tr>
+        <tr>
+          <td class="row-label">Browser Extension</td>
+          <td class="source-cell">✅</td>
+          <td class="source-cell">✅</td>
+          <td class="source-cell">❌</td>
+          <td class="source-cell">🙋<br/>Technicznie tak, ale jest zaprojektowane w celu testowania aplikacji - jednak nie widzę przeszkód, żeby używać go w innych kontekstach</td>
+        </tr>
+        <tr>
+          <td class="row-label">Microsoft 365 Integration</td>
+          <td class="source-cell">✅<br/><a href="https://learn.microsoft.com/en-us/microsoft-365/copilot/copilot-anthropic-apps">link</a></td>
+          <td class="source-cell">❌</td>
+          <td class="source-cell">✅<br/>Deep integration, even in Windows</td>
+          <td class="source-cell">❌</td>
+        </tr>
+        <tr>
+          <td class="row-label">Working in Web/Cloud (Directly connecting to repos)</td>
+          <td class="source-cell">✅</td>
+          <td class="source-cell">✅</td>
+          <td class="source-cell">✅<br/><a href="https://github.com/features/spark">GitHub Spark</a></td>
+          <td class="source-cell">❌</td>
+        </tr>
+        <tr>
+          <td class="row-label">UI/UX tools</td>
+          <td class="source-cell">✅<br/><a href="https://claude.ai/design/">Claude Design</a></td>
+          <td class="source-cell">❌</td>
+          <td class="source-cell">❌</td>
+          <td class="source-cell">✅<br/><a href="https://stitch.withgoogle.com/">Google Stitch</a></td>
+        </tr>
+        <tr>
+          <td class="row-label">Other tools</td>
+          <td class="source-cell">❌</td>
+          <td class="source-cell">❌</td>
+          <td class="source-cell">❌</td>
+          <td class="source-cell">✅<br/><a href="https://labs.google/experiments">Google Labs</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox">
+    <button id="lightbox-close" aria-label="Close">&#x2715;</button>
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
+  <script>
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.getElementById('lightbox-close');
+
+    document.querySelectorAll('.thumb').forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.classList.add('open');
+      });
+    });
+
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox) lightbox.classList.remove('open');
+    });
+
+    closeBtn.addEventListener('click', () => lightbox.classList.remove('open'));
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') lightbox.classList.remove('open');
+    });
+  </script>
+
+</body>
+</html>
