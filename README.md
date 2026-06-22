@@ -1,5 +1,7 @@
 # igor-g-pm.github.io
 
+## [Rekomendacje (AI, LLM, modele, narzędzia)](experiments/recommendations/README.md)
+
 ## Experiments
 
 ### [Porównanie Pluginów VS Code](experiments/vs-code-plugins/README.md)
